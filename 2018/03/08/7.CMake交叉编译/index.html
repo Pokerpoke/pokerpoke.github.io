@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CMake交叉编译交叉编译简介简单地说，就是在一个平台上生成另一个平台上的可执行代码。同一个体系结构可以运行不同的操作系统；同样，同一个操作系统也可以在不同的体系结构上运行。举例来说，我们常说的x86 Linux平台实际上是Intel x86体系结构和Linux for x86操作系统的统称；而x86 WinNT平台实际上是Intel x86体系结构和Windows NT for x86操作系统的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/2018/03/08/7.CMake交叉编译/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CMake交叉编译交叉编译简介简单地说，就是在一个平台上生成另一个平台上的可执行代码。同一个体系结构可以运行不同的操作系统；同样，同一个操作系统也可以在不同的体系结构上运行。举例来说，我们常说的x86 Linux平台实际上是Intel x86体系结构和Linux for x86操作系统的统称；而x86 WinNT平台实际上是Intel x86体系结构和Windows NT for x86操作系统的">
+<meta property="og:updated_time" content="2017-11-27T12:26:59.724Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="CMake交叉编译交叉编译简介简单地说，就是在一个平台上生成另一个平台上的可执行代码。同一个体系结构可以运行不同的操作系统；同样，同一个操作系统也可以在不同的体系结构上运行。举例来说，我们常说的x86 Linux平台实际上是Intel x86体系结构和Linux for x86操作系统的统称；而x86 WinNT平台实际上是Intel x86体系结构和Windows NT for x86操作系统的">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-7.CMake交叉编译" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/7.CMake交叉编译/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.268Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CMake交叉编译"><a href="#CMake交叉编译" class="headerlink" title="CMake交叉编译"></a>CMake交叉编译</h1><h2 id="交叉编译简介"><a href="#交叉编译简介" class="headerlink" title="交叉编译简介"></a>交叉编译简介</h2><p>简单地说，就是在一个平台上生成另一个平台上的可执行代码。同一个体系结构可以运行不同的操作系统；同样，同一个操作系统也可以在不同的体系结构上运行。举例来说，我们常说的x86 Linux平台实际上是Intel x86体系结构和Linux for x86操作系统的统称；而x86 WinNT平台实际上是Intel x86体系结构和Windows NT for x86操作系统的简称。—–<a href="https://baike.baidu.com/item/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91" target="_blank" rel="noopener">交叉编译_百度百科</a></p>
+<p>使用交叉编译工具的原因可能是目标平台（arm等）没有相应的编译环境，比如某些开发板（本人用的Tiny4412等）为了节省资源在系统中剔除了相关的编译环境，或者某些开发板（树莓派等）虽然提供了编译环境，但由于系统处理资源的限制，需要极长的编译时间，也有可能由于一些其他原因需要交叉编译。</p>
+<h2 id="交叉编译工具链"><a href="#交叉编译工具链" class="headerlink" title="交叉编译工具链"></a>交叉编译工具链</h2><p>如果是购买的arm嵌入式开发板，卖家会提供相关的交叉编译工具链，如<code>arm-linux-gcc-4.5.1-v6-vfp.tgz</code>，将该文件解压到相关目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvzf arm-linux-gcc-4.5.1-v6-vfp.tgz -C /</span><br></pre></td></tr></table></figure>
+<p>如果是树莓派等开发板，需要从手动下载<a href="https://github.com/raspberrypi/tools" target="_blank" rel="noopener">Github/rapberrypi/tools</a></p>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>需要将交叉编译工具链添加到环境变量以便系统进行查找</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/your/toolschain/path:$PATH</span><br></pre></td></tr></table></figure>
+<p>测试是否添加成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arm-linux-gcc -v</span><br></pre></td></tr></table></figure>
+<p>如果使用<a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener">oh-my-zsh</a>可以在<code>.zshrc</code>添加环境变量免去了每次输入的麻烦</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$HOME/bin:/usr/local/bin:$PATH</span><br><span class="line"><span class="meta">#</span> 添加下面这一行</span><br><span class="line">export PATH=/your/toolschain/path:$PATH</span><br></pre></td></tr></table></figure>
+<h2 id="CMake交叉编译准备"><a href="#CMake交叉编译准备" class="headerlink" title="CMake交叉编译准备"></a>CMake交叉编译准备</h2><p>为了方便对项目进行组织，以后续的可能对多个目标平台进行编译，创建一个专门存放<code>toolschain.cmake</code>文件的文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── CMakeLists.txt</span><br><span class="line">│   ├── cmake</span><br><span class="line">│   │   ├── modules                 # 用以存放FindXXXX.cmake</span><br><span class="line">│   │   └── toolschain</span><br><span class="line">│   │       └── Tiny4412.cmake      # 用于存放toolschain.cmake</span><br></pre></td></tr></table></figure>
+<p>在顶层<code>CMakeLists.txt</code>中添加以下命令</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加判断条件，在编译时使用如下命令才会进行交叉编译，否则调用本机编译程序，如果有多个目标平台添加相关判断即可</span></span><br><span class="line"><span class="comment"># cmake -DCMAKE_BUILD_TARGET=Tiny4412 ..</span></span><br><span class="line"><span class="keyword">if</span>(CMAKE_BUILD_TARGET <span class="keyword">STREQUAL</span> Tiny4412)</span><br><span class="line">    <span class="comment"># 设置toolchain文件路径</span></span><br><span class="line">    <span class="keyword">set</span>(CMAKE_TOOLCHAIN_FILE </span><br><span class="line">        <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/cmake/toolschain/Tiny4412.cmake)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+<h2 id="Tiny4412-cmake"><a href="#Tiny4412-cmake" class="headerlink" title="Tiny4412.cmake"></a>Tiny4412.cmake</h2><p>下面是本人使用<code>Tiny4412.cmake</code>将其中的路径机型修改即可</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置目标系统</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_SYSTEM_NAME Linux)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_SYSTEM_PROCESSOR arm)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工具链目录</span></span><br><span class="line"><span class="keyword">set</span>(TOOL_CHAIN_DIR /opt/FriendlyARM/toolschain/<span class="number">4.5</span>.<span class="number">1</span>)</span><br><span class="line"><span class="keyword">set</span>(TOOL_CHAIN_INCLUDE </span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/sys-root/usr/<span class="keyword">include</span></span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/<span class="keyword">include</span></span><br><span class="line">    )</span><br><span class="line"><span class="keyword">set</span>(TOOL_CHAIN_LIB </span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/sys-root/usr/lib</span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/lib</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置编译器位置</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_C_COMPILER <span class="string">"arm-linux-gcc"</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_COMPILER <span class="string">"arm-linux-g++"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置Cmake查找主路径</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_FIND_ROOT_PATH <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)</span><br><span class="line"><span class="comment"># 只在指定目录下查找库文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)</span><br><span class="line"><span class="comment"># 只在指定目录下查找头文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)</span><br><span class="line"><span class="comment"># 只在指定目录下查找依赖包</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(</span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/<span class="keyword">include</span></span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/sys-root/usr/<span class="keyword">include</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_INCLUDE_PATH </span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_INCLUDE&#125;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_LIBRARY_PATH </span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_LIB&#125;</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/7.CMake交叉编译/" data-id="cjejklggk000cv2jxm9ac488z" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/8.CMake编译Qt项目/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/6.CMake FindXXXX.cmake/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

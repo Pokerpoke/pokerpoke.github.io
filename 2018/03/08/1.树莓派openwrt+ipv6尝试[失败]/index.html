@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="树莓派openwrt+ipv6尝试A attempt about flashing openwrt to RaspberryPi and enable ipv6. 1.刷入openwrt从网上发现树莓派能够刷入openwrt,同时科协技术部缺少一个能免费上网的东西，于是想使用树莓派刷入openwrt挂上shadowsocks来免费上网。至于如何ipv6免费上网，可以参考我的这篇博客[校园ipv6免">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/2018/03/08/1.树莓派openwrt+ipv6尝试[失败]/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="树莓派openwrt+ipv6尝试A attempt about flashing openwrt to RaspberryPi and enable ipv6. 1.刷入openwrt从网上发现树莓派能够刷入openwrt,同时科协技术部缺少一个能免费上网的东西，于是想使用树莓派刷入openwrt挂上shadowsocks来免费上网。至于如何ipv6免费上网，可以参考我的这篇博客[校园ipv6免">
+<meta property="og:updated_time" content="2018-03-08T02:50:06.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="树莓派openwrt+ipv6尝试A attempt about flashing openwrt to RaspberryPi and enable ipv6. 1.刷入openwrt从网上发现树莓派能够刷入openwrt,同时科协技术部缺少一个能免费上网的东西，于是想使用树莓派刷入openwrt挂上shadowsocks来免费上网。至于如何ipv6免费上网，可以参考我的这篇博客[校园ipv6免">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-1.树莓派openwrt+ipv6尝试[失败]" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.树莓派openwrt+ipv6尝试[失败]/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.252Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="树莓派openwrt-ipv6尝试"><a href="#树莓派openwrt-ipv6尝试" class="headerlink" title="树莓派openwrt+ipv6尝试"></a>树莓派openwrt+ipv6尝试</h1><p>A attempt about flashing openwrt to RaspberryPi and enable ipv6.</p>
+<h2 id="1-刷入openwrt"><a href="#1-刷入openwrt" class="headerlink" title="1.刷入openwrt"></a>1.刷入openwrt</h2><p>从网上发现树莓派能够刷入openwrt,同时科协技术部缺少一个能免费上网的东西，于是想使用树莓派刷入openwrt挂上shadowsocks来免费上网。<br>至于如何ipv6免费上网，可以参考我的这篇博客[校园ipv6免流量][]。<br>[校园ipv6免流量]: <a href="https://jpokerpoke.blogspot.com/2016/03/ipv6vpsshadowsocksproxierfier.html" target="_blank" rel="noopener">https://jpokerpoke.blogspot.com/2016/03/ipv6vpsshadowsocksproxierfier.html</a><br>I have seen many sites about how to flash openwrt to RaspberryPi.Also,the techology department of NWPU Science and Techology Association need a way to surf the internet free.So,i attempt to do something.<br>How to surf the internet free?You can view my blogger,[校园ipv6免流量][]。<br>[校园ipv6免流量]: <a href="https://jpokerpoke.blogspot.com/2016/03/ipv6vpsshadowsocksproxierfier.html" target="_blank" rel="noopener">https://jpokerpoke.blogspot.com/2016/03/ipv6vpsshadowsocksproxierfier.html</a></p>
+<p>下载openwrt镜像 <a href="https://openwrt.org/" title="openwrt" target="_blank" rel="noopener">openwrt</a>。<br>但是官方的有问题，wiki上写了支持树莓派3，没有bcm2710版本所以选择了lede项目组的镜像，下载地址 <a href="https://www.lede-project.org/" title="LEDE project" target="_blank" rel="noopener">LEDE project</a></p>
+<p>Download the image of openwrt <a href="https://openwrt.org/" title="openwrt" target="_blank" rel="noopener">openwrt</a>.<br>There some issues about official source. Also the wiki says it supports RaspberryPi 3B,but there is no version of bcm2710.So I choose the image of LEDE project <a href="https://openwrt.org/" title="openwrt" target="_blank" rel="noopener">openwrt</a>.</p>
+<p>写入openwrt镜像</p>
+<ul>
+<li><em>windows</em></li>
+</ul>
+<p>使用Win32DiskImager <a href="https://sourceforge.net/projects/win32diskimager/" target="_blank" rel="noopener">Download pages</a><br>Use Win32DiskImager <a href="https://sourceforge.net/projects/win32diskimager/" target="_blank" rel="noopener">Download pages</a></p>
+<ul>
+<li><em>Linux</em></li>
+</ul>
+<p>使用dd命令烧写镜像</p>
+<p>Use dd comand to flash.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=lede-brcm2708-bcm2710-rpi-3-ext4-sdcard.img of=/dev/sdb</span><br></pre></td></tr></table></figure>
+<h2 id="2-配置openwrt"><a href="#2-配置openwrt" class="headerlink" title="2.配置openwrt"></a>2.配置openwrt</h2><p>Set up openwrt.</p>
+<p>首先需要开启ssh服务和luci的web页面。<br>关于<a href="https://github.com/openwrt/luci/wiki" target="_blank" rel="noopener">luci</a>。</p>
+<p>First of all, turn on ssh service and luci.<br>About <a href="https://github.com/openwrt/luci/wiki" target="_blank" rel="noopener">luci</a>.</p>
+<p>因为openwrt默认没有开启ssh服务，所以没法远程登陆=。=，还好我有个显示屏可以用。</p>
+<p>By default, the ssh service isn’t enable. So, there’s no way to login by ssh. Fortunately, I have a lcd display.</p>
+<p>两种方法开启ssh服务。</p>
+<p>Two ways to enable ssh service.</p>
+<ul>
+<li>直接关闭防火墙</li>
+</ul>
+<p>Turn off the firewall.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/firewall stop</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改防火墙配置</li>
+</ul>
+<p>Edit the document of firewall.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/config/firewall</span><br><span class="line"><span class="meta">#</span> 通过搜索直接找到ssh命令所在行，取消注释就行</span><br><span class="line"><span class="meta">#</span> Unmark the ssh lines by searching.</span><br><span class="line"><span class="meta">#</span> in vim use `\ssh`</span><br></pre></td></tr></table></figure>
+<p>安装luci。</p>
+<p>Install luci.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci</span><br></pre></td></tr></table></figure>
+<h2 id="3-进入浏览器配置路由器"><a href="#3-进入浏览器配置路由器" class="headerlink" title="3.进入浏览器配置路由器"></a>3.进入浏览器配置路由器</h2><p>Login the web to configure the router.</p>
+<p>纯图形化的界面，没啥说的了。<br>A easy interface , nothing to introduce.</p>
+<h2 id="4-问题"><a href="#4-问题" class="headerlink" title="4.问题"></a>4.问题</h2><p>Issues.</p>
+<p>如果在网线接口里面启用了dhcpv6协议，会只获得ipv6地址，并不会获得ipv4地址，而且无法连通，原因未知。你也没法使用ping6命令。</p>
+<p>If you enable dhcpv6 proto in interface , you will get a ipv6 address , but no ipv4  address . What’s more , you cannot use the ping6 commmand . Also , it cannot connect the internet . I don’t know the solution.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.树莓派openwrt+ipv6尝试[失败]/" data-id="cjejklggd0007v2jxd3pfmph6" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/1.树莓派+nginx+php/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/1.使用 supervisor 管理进程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

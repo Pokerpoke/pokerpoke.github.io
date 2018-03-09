@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-1.VS code 与 Latex 真乃天作之和" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.VS code 与 Latex 真乃天作之和/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.248Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="VS-Code-与-LaTeX-真乃天作之合"><a href="#VS-Code-与-LaTeX-真乃天作之合" class="headerlink" title="VS Code 与 LaTeX 真乃天作之合"></a>VS Code 与 LaTeX 真乃天作之合</h1><h2 id="1-起因"><a href="#1-起因" class="headerlink" title="1.起因"></a>1.起因</h2><p>最近要写毕业论文，嫌Word交叉引用与排版麻烦，上网一搜发现GitHub有<a href="https://github.com/polossk/LaTeX-Template-For-NPU-Thesis" target="_blank" rel="noopener">西北工业大学论文模板</a>，遂决定用<a href="https://zh.wikipedia.org/zh-cn/LaTeX" target="_blank" rel="noopener">LaTeX</a>写论文。</p>
+<h2 id="2-编辑器"><a href="#2-编辑器" class="headerlink" title="2.编辑器"></a>2.编辑器</h2><p>LaTeX写作是没啥大问题了，编辑器的选择又让人头大，常用的有如下几个：</p>
+<ul>
+<li><p><a href="http://www.winedt.com/" target="_blank" rel="noopener">WinEdt</a> 这货很好用，但是，他收费，而且不菲，有钱的情况下选择这个能省很多心，没钱的情况下使用30天，写完一篇论文应该问题不大。</p>
+</li>
+<li><p><a href="https://www.tug.org/texworks/" target="_blank" rel="noopener">TeXworks</a>  这是TeX Live自带的，比较。。。简约。。。</p>
+</li>
+<li><p><a href="http://www.texstudio.org/" target="_blank" rel="noopener">TeXstudio</a>  这是一个开源的书写软件，挺好用的。</p>
+</li>
+</ul>
+<p>最后一个是主角，<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a>，这是微软推出的一款文本编辑器，支持多种语言，跨平台支持，下面将介绍如何将VS Code改造成一个LaTeX的IDE。<br>其实，诸如<a href="https://atom.io/" target="_blank" rel="noopener">Atom</a>和<a href="https://www.sublimetext.com/" target="_blank" rel="noopener">Sublime Text</a>也能够配置成一个IDE，不过，相对而言，VS Code比较友好（毕竟带着微软爸爸的光环）。</p>
+<h2 id="3-安装配置"><a href="#3-安装配置" class="headerlink" title="3.安装配置"></a>3.安装配置</h2><p>从<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code官网</a>下载安装包，一路下一步，建议勾选所有选项，这样就能直接在文件夹直接右键打开目录了。</p>
+<div align="center"><br>    <img src="http://oqhs3f83a.bkt.clouddn.com/VS_Code_1.png" alt="VS Code 安装"><br></div>
+
+<h2 id="4-插件配置"><a href="#4-插件配置" class="headerlink" title="4.插件配置"></a>4.插件配置</h2><p>编辑器长这样：</p>
+<div align="center"><br>    <img src="http://oqhs3f83a.bkt.clouddn.com/VS_Code_2.png" alt="VS Code 界面"><br></div>
+
+<p>左边栏依次为资源管理器（点开是文件目录树），搜索，源代码管理(Git)，调试(C语言之类的)，扩展，很明显，点开扩展直接搜索以下插件并安装即可。</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.latex" target="_blank" rel="noopener">LaTeX Language Support</a></li>
+</ul>
+<p>这个插件为VS Code提供了LaTeX语言支持。</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop" target="_blank" rel="noopener">LaTeX Wokrshop</a></li>
+</ul>
+<p>这是主要的一个插件，提供了一个编译、智能提示、代码片段、引用提示的环境。安装完成已经可以使用了，但我们最好还要配置一下。打开<code>VS Code &gt; 首选项 &gt; 设置</code></p>
+<div align="center"><br>    <img src="http://oqhs3f83a.bkt.clouddn.com/VS_Code_3.png" alt="VS Code 设置"><br></div>
+
+<p>可以看到左边是可供调整的设置选项，右边用户设置区，分两种，用户设置和工作区设置。<br>用户设置会覆盖默认设置，并应用于所有工作区、项目，而工作区设置会覆盖用户设置，但仅在此项目中产生作用，我们要修改的是以下设置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">"latex-workshop.latex.toolchain": [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"command"</span>: <span class="string">"xelatex"</span>,</span><br><span class="line">        <span class="attr">"args"</span>: [</span><br><span class="line">            <span class="string">"-synctex=1"</span>,</span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span>,</span><br><span class="line">            <span class="string">"-file-line-error"</span>,</span><br><span class="line">            <span class="string">"-pdf"</span>,</span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这是编译控制，将其中的<code>command</code>改为自己所需要的LaTeX编译器，如pdflatex等，后面的参数可以不用管，如有特殊需要可以修改。<br>如果有参考文献，且需要生成目录，可以将其改成完整的编译过程：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">"latex-workshop.latex.toolchain": [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"command"</span>: <span class="string">"xelatex"</span>,</span><br><span class="line">        <span class="attr">"args"</span>: [</span><br><span class="line">            <span class="string">"-synctex=1"</span>,</span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span>,</span><br><span class="line">            <span class="string">"-file-line-error"</span>,</span><br><span class="line">            <span class="string">"-pdf"</span>,</span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"command"</span>: <span class="string">"bibtex"</span>,</span><br><span class="line">        <span class="attr">"args"</span>: [</span><br><span class="line">            <span class="string">"%DOCFILE%"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"command"</span>: <span class="string">"xelatex"</span>,</span><br><span class="line">        <span class="attr">"args"</span>: [</span><br><span class="line">            <span class="string">"--synctex"</span>,</span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span>,</span><br><span class="line">            <span class="string">"-file-line-error"</span>,</span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"command"</span>: <span class="string">"xelatex"</span>,</span><br><span class="line">        <span class="attr">"args"</span>: [</span><br><span class="line">            <span class="string">"--synctex"</span>,</span><br><span class="line">            <span class="string">"-interaction=nonstopmode"</span>,</span><br><span class="line">            <span class="string">"-file-line-error"</span>,</span><br><span class="line">            <span class="string">"%DOC%"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>如果将文件拆分为小文件，需要在每个文件的开头指明根文件所在位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%!TEX root = ../paper.tex</span><br></pre></td></tr></table></figure>
+<p>还可以通过<code>LaTeX Workshop:View PDF in new tab</code>来达到如下效果：</p>
+<div align="center"><br>    <img src="http://oqhs3f83a.bkt.clouddn.com/VS_Code_4.png" alt="view PDF in new tab"><br></div>
+
+<p>此时通过<code>LaTeX Workshop:SynTeX from cursor</code>还能将PDF同步至光标所在位置，极大的方便了书写。<br>导入参考文献以后，通过<code>LaTeX Workshop:Open citation broswer</code>可以显示可供引用的参考文献，不过该命令只能读取一个bib文件，多个文件时仅读取第一个。<br>该插件默认在保存的时候自动编译一次文件。<br>这么设置已经可以用了，如果需要更多的功能，参阅插件详情页面即可。</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=nickfode.latex-formatter" target="_blank" rel="noopener">latex-formatter</a></li>
+</ul>
+<p>这是一个代码格式化的工具，我们需要用它来使每个章节下产生缩进，而不是所有的都顶行写，效果如下，方便阅读。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">\chapter&#123;balabalabala&#125;</span><br><span class="line">    \section&#123;balabalabala&#125;</span><br><span class="line">        \subsection&#123;balabalabala&#125;</span><br><span class="line">            \par balabalabala</span><br><span class="line">        \subsection&#123;balabalabala&#125;</span><br><span class="line">            \par balabalabala</span><br><span class="line">    \section&#123;balabalabala&#125;</span><br><span class="line">        \subsection&#123;balabalabala&#125;</span><br><span class="line">            \par balabalabala</span><br></pre></td></tr></table></figure>
+<p>安装完成无法达到以上效果，我们需要修改配置文件，文件一般位于<code>.\texlive\2016\texmf-dist\scripts\latexindent</code>，关于latexindent的配置参见<a href="https://github.com/cmhughes/latexindent.pl" target="_blank" rel="noopener">latexindent.p</a>，我这里使用一个比较直接的方式，直接修改<code>defaultSettings.yaml</code>，将其中的<code>indent</code>修改为自己想要的值。其他用法都在该文件中有详细注释，不再赘述。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">indentAfterHeadings:</span></span><br><span class="line"><span class="attr">    part:</span></span><br><span class="line"><span class="attr">       indent:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">       level:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">    chapter:</span></span><br><span class="line"><span class="attr">       indent:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">       level:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">    section:</span></span><br><span class="line"><span class="attr">       indent:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">       level:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">    subsection:</span></span><br><span class="line"><span class="attr">       indent:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">       level:</span> <span class="number">4</span></span><br><span class="line">    <span class="string">subsection*:</span></span><br><span class="line"><span class="attr">       indent:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">       level:</span> <span class="number">4</span></span><br><span class="line"><span class="attr">    subsubsection:</span></span><br><span class="line"><span class="attr">       indent:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">       level:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">    paragraph:</span></span><br><span class="line"><span class="attr">       indent:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">       level:</span> <span class="number">6</span></span><br><span class="line"><span class="attr">    subparagraph:</span></span><br><span class="line"><span class="attr">       indent:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">       level:</span> <span class="number">7</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-代码片段"><a href="#5-代码片段" class="headerlink" title="5.代码片段"></a>5.代码片段</h2><p>LaTeX插入图片太麻烦？那我们打开<code>文件 &gt; 首选项 &gt; 用户代码片段</code>，插入以下代码</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">"Input a figure": &#123;</span><br><span class="line">        "prefix": "figure",</span><br><span class="line">        "body": [</span><br><span class="line">            "\\begin&#123;figure&#125;[htp]",</span><br><span class="line">            "\t\\centering",</span><br><span class="line">            "\t\\includegraphics[width=13cm]&#123;$1&#125;",</span><br><span class="line">            "\t\\caption&#123;$2&#125;",</span><br><span class="line">            "\t\\label&#123;fig:$3&#125;",</span><br><span class="line">            "\\end&#123;figure&#125;",</span><br><span class="line">            <span class="string">"$0"</span></span><br><span class="line">        ],</span><br><span class="line">        "description": "Input a figure"</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>注：可以按照注释写一些自己的代码段来更快的插入相关模块，<code>$1</code>、<code>$2</code>、<code>$3</code>等表示可以用<code>Tab</code>键在这些位置间切换，<code>$0</code>表示回车以后的位置。</p>
+<p>同时打开<code>文件 &gt; 首选项 &gt; 键盘快捷方式</code>，搜索<code>snippet</code>，给插入代码片段一个诸如<code>ctrl+shift+s</code>的快捷键，这样下次想插入图片时，按下快捷键输入<code>image</code>，敲回车就行了。可以添加诸如表格啊公式啊代码段啊之类的快速输入，在有大量图片需要插入时事半功倍。</p>
+<h2 id="6-其他插件推荐"><a href="#6-其他插件推荐" class="headerlink" title="6.其他插件推荐"></a>6.其他插件推荐</h2><ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight" target="_blank" rel="noopener">TODO Highlight</a></li>
+</ul>
+<p>论文某一部分写不下去了，加个<code>% TODO:</code>，留着下次写。</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula" target="_blank" rel="noopener">Dracula Official</a></li>
+</ul>
+<p>一款不错的黑色主题。</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager" target="_blank" rel="noopener">Project Manager</a></li>
+</ul>
+<p>用来管理项目的，可以快速地在各个项目间切换。</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync" target="_blank" rel="noopener">Settings Sync</a></li>
+</ul>
+<p>当你在多台电脑上使用VS Code时，可以快速地同步配置。</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=WakaTime.vscode-wakatime" target="_blank" rel="noopener">WakaTime</a></li>
+</ul>
+<p>忠实地记录你在什么项目上用什么编辑器用什么语言写了多久的代码，在Chrome上也有插件，告诉你浏览了多久的网页。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.VS code 与 Latex 真乃天作之和/" data-id="cjejklgg80002v2jx0fwmi4b2" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-1.vim vundle 配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.vim vundle 配置/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.244Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Vim-Vundle-配置"><a href="#Vim-Vundle-配置" class="headerlink" title="Vim Vundle 配置"></a>Vim Vundle 配置</h1><p>Set up Vim Vundle.</p>
+<h2 id="1-关于Vundle"><a href="#1-关于Vundle" class="headerlink" title="1.关于Vundle"></a>1.关于Vundle</h2><p>About Vundle.</p>
+<p>Vundle 是一个Vim的包管理工具，类似于sublime text,atom,oh-my-zsh的插件管理工具。</p>
+<p>Vundle is a package manager of Vim. Just like packages manager of sublime text, atom, oh-my-zsh, etc.</p>
+<p>Vundle的Github主页是<a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="noopener">Vundle.vim</a></p>
+<p>The index of Vundle is <a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="noopener">Vundle.vim</a></p>
+<h2 id="2-配置Vundle"><a href="#2-配置Vundle" class="headerlink" title="2.配置Vundle"></a>2.配置Vundle</h2><p>Set up Vundle.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</span><br></pre></td></tr></table></figure>
+<p>将这些代码放到<code>~/.vimrc</code>文件中，如果没有这个文件需要自己创建。</p>
+<p>Put the below codes into <code>~/.vimrc</code>. If the docments is not exists, just creat one.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">set nocompatible              " be iMproved, required</span><br><span class="line">filetype off                  " required</span><br><span class="line"></span><br><span class="line">" set the runtime path to include Vundle and initialize</span><br><span class="line">set rtp+=~/.vim/bundle/Vundle.vim</span><br><span class="line">call vundle#begin()</span><br><span class="line">" alternatively, pass a path where Vundle should install plugins</span><br><span class="line">"call vundle#begin('~/some/path/here')</span><br><span class="line"></span><br><span class="line">" let Vundle manage Vundle, required</span><br><span class="line">Plugin 'VundleVim/Vundle.vim'</span><br><span class="line"></span><br><span class="line">" The following are examples of different formats supported.</span><br><span class="line">" Keep Plugin commands between vundle#begin/end.</span><br><span class="line">" plugin on GitHub repo</span><br><span class="line">Plugin 'tpope/vim-fugitive'</span><br><span class="line">" plugin from http://vim-scripts.org/vim/scripts.html</span><br><span class="line">Plugin 'L9'</span><br><span class="line">" Git plugin not hosted on GitHub</span><br><span class="line">Plugin 'git://git.wincent.com/command-t.git'</span><br><span class="line">" git repos on your local machine (i.e. when working on your own plugin)</span><br><span class="line">Plugin 'file:///home/gmarik/path/to/plugin'</span><br><span class="line">" The sparkup vim script is in a subdirectory of this repo called vim.</span><br><span class="line">" Pass the path to set the runtimepath properly.</span><br><span class="line">Plugin 'rstacruz/sparkup', &#123;'rtp': 'vim/'&#125;</span><br><span class="line">" Install L9 and avoid a Naming conflict if you've already installed a</span><br><span class="line">" different version somewhere else.</span><br><span class="line">Plugin 'ascenator/L9', &#123;'name': 'newL9'&#125;</span><br><span class="line"></span><br><span class="line">" All of your Plugins must be added before the following line</span><br><span class="line">call vundle#end()            " required</span><br><span class="line">filetype plugin indent on    " required</span><br><span class="line">" To ignore plugin indent changes, instead use:</span><br><span class="line">"filetype plugin on</span><br><span class="line">"</span><br><span class="line">" Brief help</span><br><span class="line">" :PluginList       - lists configured plugins</span><br><span class="line">" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate</span><br><span class="line">" :PluginSearch foo - searches for foo; append `!` to refresh local cache</span><br><span class="line">" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal</span><br><span class="line">"</span><br><span class="line">" see :h vundle for more details or wiki for FAQ</span><br><span class="line">" Put your non-Plugin stuff after this line</span><br></pre></td></tr></table></figure>
+<p>运行vim，在vim中使用以下命令<code>:PluginInstall</code>来安装插件，如果出现错误，将出错的那个插件注释掉或者删除即可。</p>
+<p>Run vim and use <code>:PluginInstall</code> to install the plugins. Maybe it will come with some questions, just mark or remove the line of that plugin.</p>
+<h2 id="3-插件推荐"><a href="#3-插件推荐" class="headerlink" title="3.插件推荐"></a>3.插件推荐</h2><p>Plugin recommended.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Plugin 'altercation/vim-colors-solarized'</span><br><span class="line">Plugin 'scrooloose/syntastic'</span><br><span class="line">Plugin 'scrooloose/nerdtree'</span><br><span class="line">Plugin 'nvie/vim-flake8'</span><br><span class="line">Plugin 'pangloss/vim-javascript'</span><br><span class="line">Plugin 'Raimondi/delimitMate'</span><br></pre></td></tr></table></figure>
+<p>在安装一些插件的时候也许会提示什么vim不是支持python什么的，是由于该插件由python编写，需要将Vim重新编译。(树莓派上直接apt install的vim就没有python支持，需要重新编译)</p>
+<p>Maybe it will warn you that some plugin won’t work due to no supported by python.You need to recompile the Vim(especially on raspberry pi).</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.vim vundle 配置/" data-id="cjejklgft0001v2jx48nufm2r" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-1.ssh免密码登陆" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.ssh免密码登陆/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.240Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ssh免密码登陆"><a href="#ssh免密码登陆" class="headerlink" title="ssh免密码登陆"></a>ssh免密码登陆</h1><h2 id="1-生成公钥与私钥"><a href="#1-生成公钥与私钥" class="headerlink" title="1.生成公钥与私钥"></a>1.生成公钥与私钥</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+<p>三次回车之后会生成相应的公钥与私钥</p>
+<h2 id="2-将公钥拷贝到目标计算机上"><a href="#2-将公钥拷贝到目标计算机上" class="headerlink" title="2.将公钥拷贝到目标计算机上"></a>2.将公钥拷贝到目标计算机上</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.ssh/id_rsa.pub jiang@192.168.199.144:/home/jiang/.ssh/rsa.jiang.pub</span><br></pre></td></tr></table></figure>
+<h2 id="3-将公钥添加至信任名单"><a href="#3-将公钥添加至信任名单" class="headerlink" title="3.将公钥添加至信任名单"></a>3.将公钥添加至信任名单</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch authorized_keys</span><br><span class="line">cat rsa.jiang.pub &gt;&gt; authorized_keys</span><br></pre></td></tr></table></figure>
+<p>注意，使用 &gt;&gt; 不要用 &gt; ，否则会使其他用户无法登陆</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.ssh免密码登陆/" data-id="cjejklgfo0000v2jxj7zcqjeg" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/hello-world/" class="article-date">
+  <time datetime="2018-03-09T01:38:21.309Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/08/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/hello-world/" data-id="cjejkg24k0007uajx72g8hbmx" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

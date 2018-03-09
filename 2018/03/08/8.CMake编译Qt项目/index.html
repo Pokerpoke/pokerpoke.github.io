@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CMake编译Qt项目1.背景对于Qt项目，一般情况下使用qmake进行编译，但是在编译过程中会对源代码有一定程度上的改变，而使用CMake则没有这种烦恼，或者说比较简单的进行编译。 借用网上的一句话：  CMake is CMake, others are bullshit.  2.QtQt（/ˈkjuːt/，發音同「cute」）是一个跨平台的C++應用程式開發框架。廣泛用於開發GUI程式，這種">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/2018/03/08/8.CMake编译Qt项目/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CMake编译Qt项目1.背景对于Qt项目，一般情况下使用qmake进行编译，但是在编译过程中会对源代码有一定程度上的改变，而使用CMake则没有这种烦恼，或者说比较简单的进行编译。 借用网上的一句话：  CMake is CMake, others are bullshit.  2.QtQt（/ˈkjuːt/，發音同「cute」）是一个跨平台的C++應用程式開發框架。廣泛用於開發GUI程式，這種">
+<meta property="og:updated_time" content="2017-11-27T12:29:19.999Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="CMake编译Qt项目1.背景对于Qt项目，一般情况下使用qmake进行编译，但是在编译过程中会对源代码有一定程度上的改变，而使用CMake则没有这种烦恼，或者说比较简单的进行编译。 借用网上的一句话：  CMake is CMake, others are bullshit.  2.QtQt（/ˈkjuːt/，發音同「cute」）是一个跨平台的C++應用程式開發框架。廣泛用於開發GUI程式，這種">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-8.CMake编译Qt项目" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/8.CMake编译Qt项目/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.272Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CMake编译Qt项目"><a href="#CMake编译Qt项目" class="headerlink" title="CMake编译Qt项目"></a>CMake编译Qt项目</h1><h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h2><p>对于Qt项目，一般情况下使用qmake进行编译，但是在编译过程中会对源代码有一定程度上的改变，而使用CMake则没有这种烦恼，或者说比较简单的进行编译。</p>
+<p>借用网上的一句话：</p>
+<blockquote>
+<p>CMake is CMake, others are bullshit.</p>
+</blockquote>
+<h2 id="2-Qt"><a href="#2-Qt" class="headerlink" title="2.Qt"></a>2.Qt</h2><p>Qt（/ˈkjuːt/，發音同「cute」）是一个跨平台的C++應用程式開發框架。廣泛用於開發GUI程式，這種情況下又被称为部件工具箱。也可用於開發非GUI程式，比如控制台工具和伺服器。Qt使用於OPIE、Skype、VLC media player、Adobe Photoshop Elements、VirtualBox與Mathematica以及被Autodesk 、歐洲太空總署、夢工廠、Google、HP、KDE、盧卡斯影業、西門子公司、富豪集團, 華特迪士尼動畫製作公司、三星集團、飛利浦、Panasonic 所使用。<br>它是Digia公司的产品。Qt使用標準的C++和特殊的代码生成扩展（称为元对象编译器（Meta Object Compiler, moc））以及一些巨集。通過語言綁定，其他的程式語言也可以使用Qt。<br>Qt是自由且開放原始碼的軟體，在GNU較寬鬆公共許可證（LGPL）條款下發布。所有版本都支援廣泛的編譯器，包括GCC的C++編譯器和Visual Studio。——<a href="https://zh.wikipedia.org/wiki/Qt" target="_blank" rel="noopener">Qt-wiki</a></p>
+<h2 id="3-准备工作"><a href="#3-准备工作" class="headerlink" title="3.准备工作"></a>3.准备工作</h2><p>Qt环境配置，在这里使用Qt4版本。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install qt4-default</span><br></pre></td></tr></table></figure>
+<h2 id="4-CMakeLists-txt"><a href="#4-CMakeLists-txt" class="headerlink" title="4.CMakeLists.txt"></a>4.CMakeLists.txt</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找相关的依赖库</span></span><br><span class="line"><span class="keyword">find_package</span>(Qt4 REQUIRED)</span><br><span class="line"><span class="comment"># 添加路径</span></span><br><span class="line"><span class="keyword">include_directories</span>($(QT_INCLUDES))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置相关变量</span></span><br><span class="line"><span class="comment"># 自动添加当前目录至路径中</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_INCLUDE_CURRENT_DIR <span class="keyword">ON</span>)</span><br><span class="line"><span class="comment"># 自动运行moc</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTOMOC <span class="keyword">ON</span>)</span><br><span class="line"><span class="comment"># 自动运行uic</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTOUIC <span class="keyword">ON</span>)</span><br><span class="line"><span class="comment"># 自动运行rcc</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTORCC <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成可执行文件</span></span><br><span class="line"><span class="keyword">add_executable</span>(main main.cc)</span><br><span class="line"><span class="comment"># 链接库</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(main Qt4::QtCore Qt4::QtGui)</span><br></pre></td></tr></table></figure>
+<p>至此已经可以编译单文件的Qt项目了。</p>
+<h2 id="5-使用Qt-Designer进行界面设计"><a href="#5-使用Qt-Designer进行界面设计" class="headerlink" title="5.使用Qt Designer进行界面设计"></a>5.使用Qt Designer进行界面设计</h2><p>编译项目的时候会使用Qt Designer进行界面设计，完了会生成一个ui文件，我们需要将这个文件进行转换成相应的头件，当<code>CMAKE_AUTOUIC</code>设为<code>ON</code>的时候会自动生成相应的<code>ui_xxxxx.h</code>文件，只需要在相应的c++文件中<code>#include ui_xxxxx.h</code>即可。</p>
+<p>如果没有开启该选项则可以在<code>CMakeLists.txt</code>使用以下命令进行手动生成。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qt4_wrap_ui(OUTPUT_FILED INPUT_FILES)</span><br></pre></td></tr></table></figure>
+<h2 id="6-多个文件的情况"><a href="#6-多个文件的情况" class="headerlink" title="6.多个文件的情况"></a>6.多个文件的情况</h2><p>正常情况下我们会将不同界面写在不同文件里，假设我们的项目目录结构如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── CMakeLists.txt</span><br><span class="line">├── test.cc</span><br><span class="line">├── test.h</span><br><span class="line">├── test.ui             # ui文件</span><br><span class="line">├── main.cc             # 主函数所在文件</span><br></pre></td></tr></table></figure>
+<p>按照上面的步骤会出现如下错误或者一些函数为声明的错误</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">collect2: error: ld return 1 exit status</span><br></pre></td></tr></table></figure>
+<p>出现原因是因为没有将相关的文件生成动态库，自然找不到库文件或者函数声明了，解决方法是在<code>CMakeLists.txt</code>中添加如下命令：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成动态库</span></span><br><span class="line"><span class="keyword">add_library</span>(test_lib SHARED test.cc test.h)</span><br><span class="line"><span class="comment"># 链接相关依赖</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(test_lib Qt4::QtCore Qt4::QtGui)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成可执行文件</span></span><br><span class="line"><span class="keyword">add_executable</span>(main main.cc)</span><br><span class="line"><span class="comment"># 链接库</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(main test_lib Qt4::QtCore Qt4::QtGui)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/8.CMake编译Qt项目/" data-id="cjejklggk000dv2jxjmf6zy7o" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/9.JRTPLIB使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/7.CMake交叉编译/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

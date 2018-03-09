@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="树莓派+nginx+php建站Setup a webpage on Raspberry by nginx and php. 1.更新软件源update the list of softwares1sudo apt update &amp;amp;&amp;amp; sudo apt upgrade 2.安装nginx和phpinstall nginx and php12sudo apt install nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/2018/03/08/1.树莓派+nginx+php/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="树莓派+nginx+php建站Setup a webpage on Raspberry by nginx and php. 1.更新软件源update the list of softwares1sudo apt update &amp;amp;&amp;amp; sudo apt upgrade 2.安装nginx和phpinstall nginx and php12sudo apt install nginx">
+<meta property="og:updated_time" content="2016-10-02T12:36:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="树莓派+nginx+php建站Setup a webpage on Raspberry by nginx and php. 1.更新软件源update the list of softwares1sudo apt update &amp;amp;&amp;amp; sudo apt upgrade 2.安装nginx和phpinstall nginx and php12sudo apt install nginx">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-1.树莓派+nginx+php" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.树莓派+nginx+php/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.252Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="树莓派-nginx-php建站"><a href="#树莓派-nginx-php建站" class="headerlink" title="树莓派+nginx+php建站"></a>树莓派+nginx+php建站</h1><p>Setup a webpage on Raspberry by nginx and php.</p>
+<h2 id="1-更新软件源"><a href="#1-更新软件源" class="headerlink" title="1.更新软件源"></a>1.更新软件源</h2><p>update the list of softwares<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-安装nginx和php"><a href="#2-安装nginx和php" class="headerlink" title="2.安装nginx和php"></a>2.安装nginx和php</h2><p>install nginx and php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nginx</span><br><span class="line">sudo apt install php</span><br></pre></td></tr></table></figure></p>
+<p>也能使用以下命令<br>also,can use these commands<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install php5</span><br></pre></td></tr></table></figure></p>
+<p>关于php版本的问题，php5比php7更加稳定。<br>It looks like that php5 is more stable than php7.<br>More information on this site: [php.net][]<br>[php.net]:<a href="http://php.net/manual/zh/index.php" target="_blank" rel="noopener">http://php.net/manual/zh/index.php</a></p>
+<h2 id="3-配置nginx"><a href="#3-配置nginx" class="headerlink" title="3.配置nginx"></a>3.配置nginx</h2><p>Setup nginx.<br>nginx的配置文件存放在/etc/nginx/sites-available目录下。<br>只需要修改该目录下的default配置即可<br>The configurations of nginx are in /etc/nginx/sites-available.<br>Just need to edit the default to configure.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/nginx/sites-available</span><br><span class="line">sudo vim default</span><br></pre></td></tr></table></figure></p>
+<p>根据提示添加index.php,取消php配置前的注释。<br>Add “index.php” to the below line and unmark the configurations of php.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Add index.php to the list if you are using PHP</span><br><span class="line">index index.html index.htm index.nginx-debian.html;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span><br><span class="line">	#</span><br><span class="line">	location ~ \.php$ &#123;</span><br><span class="line">		include snippets/fastcgi-php.conf;</span><br><span class="line"></span><br><span class="line">		# With php5-cgi alone:</span><br><span class="line">	#	fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">		# With php5-fpm:</span><br><span class="line">		fastcgi_pass unix:/var/run/php5-fpm.sock;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>现在你可以使用其他电脑访问http://&lt;你的树莓派ip&gt;来访问树莓派了。<br>Now we can browse the site from other computers via “http://<your raspberry="" ip="">“.<br>It looks like this.</your></p>
+<h2 id="4-主页"><a href="#4-主页" class="headerlink" title="4.主页"></a>4.主页</h2><p>Index.<br>主页存放目录为/var/www/html/，删除其他文件，创建一个php文件。<br>The index site is in the /var/www/html/,you can remove other documents and creat index.php.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>现在访问树莓派的ip就能看到php的信息了。<br>Now go ahead to http://<your raspberry="" ip=""> or just input your raspberry ip in the adress in the browse.<br>Enjoy!</your></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.树莓派+nginx+php/" data-id="cjejklgga0004v2jxcdmopf97" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/1.使用cmake来构建项目/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/1.树莓派openwrt+ipv6尝试[失败]/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

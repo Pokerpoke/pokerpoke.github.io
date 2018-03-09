@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-7.CMake交叉编译" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/7.CMake交叉编译/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.268Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CMake交叉编译"><a href="#CMake交叉编译" class="headerlink" title="CMake交叉编译"></a>CMake交叉编译</h1><h2 id="交叉编译简介"><a href="#交叉编译简介" class="headerlink" title="交叉编译简介"></a>交叉编译简介</h2><p>简单地说，就是在一个平台上生成另一个平台上的可执行代码。同一个体系结构可以运行不同的操作系统；同样，同一个操作系统也可以在不同的体系结构上运行。举例来说，我们常说的x86 Linux平台实际上是Intel x86体系结构和Linux for x86操作系统的统称；而x86 WinNT平台实际上是Intel x86体系结构和Windows NT for x86操作系统的简称。—–<a href="https://baike.baidu.com/item/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91" target="_blank" rel="noopener">交叉编译_百度百科</a></p>
+<p>使用交叉编译工具的原因可能是目标平台（arm等）没有相应的编译环境，比如某些开发板（本人用的Tiny4412等）为了节省资源在系统中剔除了相关的编译环境，或者某些开发板（树莓派等）虽然提供了编译环境，但由于系统处理资源的限制，需要极长的编译时间，也有可能由于一些其他原因需要交叉编译。</p>
+<h2 id="交叉编译工具链"><a href="#交叉编译工具链" class="headerlink" title="交叉编译工具链"></a>交叉编译工具链</h2><p>如果是购买的arm嵌入式开发板，卖家会提供相关的交叉编译工具链，如<code>arm-linux-gcc-4.5.1-v6-vfp.tgz</code>，将该文件解压到相关目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvzf arm-linux-gcc-4.5.1-v6-vfp.tgz -C /</span><br></pre></td></tr></table></figure>
+<p>如果是树莓派等开发板，需要从手动下载<a href="https://github.com/raspberrypi/tools" target="_blank" rel="noopener">Github/rapberrypi/tools</a></p>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>需要将交叉编译工具链添加到环境变量以便系统进行查找</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/your/toolschain/path:$PATH</span><br></pre></td></tr></table></figure>
+<p>测试是否添加成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arm-linux-gcc -v</span><br></pre></td></tr></table></figure>
+<p>如果使用<a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener">oh-my-zsh</a>可以在<code>.zshrc</code>添加环境变量免去了每次输入的麻烦</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$HOME/bin:/usr/local/bin:$PATH</span><br><span class="line"><span class="meta">#</span> 添加下面这一行</span><br><span class="line">export PATH=/your/toolschain/path:$PATH</span><br></pre></td></tr></table></figure>
+<h2 id="CMake交叉编译准备"><a href="#CMake交叉编译准备" class="headerlink" title="CMake交叉编译准备"></a>CMake交叉编译准备</h2><p>为了方便对项目进行组织，以后续的可能对多个目标平台进行编译，创建一个专门存放<code>toolschain.cmake</code>文件的文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── CMakeLists.txt</span><br><span class="line">│   ├── cmake</span><br><span class="line">│   │   ├── modules                 # 用以存放FindXXXX.cmake</span><br><span class="line">│   │   └── toolschain</span><br><span class="line">│   │       └── Tiny4412.cmake      # 用于存放toolschain.cmake</span><br></pre></td></tr></table></figure>
+<p>在顶层<code>CMakeLists.txt</code>中添加以下命令</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加判断条件，在编译时使用如下命令才会进行交叉编译，否则调用本机编译程序，如果有多个目标平台添加相关判断即可</span></span><br><span class="line"><span class="comment"># cmake -DCMAKE_BUILD_TARGET=Tiny4412 ..</span></span><br><span class="line"><span class="keyword">if</span>(CMAKE_BUILD_TARGET <span class="keyword">STREQUAL</span> Tiny4412)</span><br><span class="line">    <span class="comment"># 设置toolchain文件路径</span></span><br><span class="line">    <span class="keyword">set</span>(CMAKE_TOOLCHAIN_FILE </span><br><span class="line">        <span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/cmake/toolschain/Tiny4412.cmake)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+<h2 id="Tiny4412-cmake"><a href="#Tiny4412-cmake" class="headerlink" title="Tiny4412.cmake"></a>Tiny4412.cmake</h2><p>下面是本人使用<code>Tiny4412.cmake</code>将其中的路径机型修改即可</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置目标系统</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_SYSTEM_NAME Linux)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_SYSTEM_PROCESSOR arm)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工具链目录</span></span><br><span class="line"><span class="keyword">set</span>(TOOL_CHAIN_DIR /opt/FriendlyARM/toolschain/<span class="number">4.5</span>.<span class="number">1</span>)</span><br><span class="line"><span class="keyword">set</span>(TOOL_CHAIN_INCLUDE </span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/sys-root/usr/<span class="keyword">include</span></span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/<span class="keyword">include</span></span><br><span class="line">    )</span><br><span class="line"><span class="keyword">set</span>(TOOL_CHAIN_LIB </span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/sys-root/usr/lib</span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/lib</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置编译器位置</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_C_COMPILER <span class="string">"arm-linux-gcc"</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_COMPILER <span class="string">"arm-linux-g++"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置Cmake查找主路径</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_FIND_ROOT_PATH <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)</span><br><span class="line"><span class="comment"># 只在指定目录下查找库文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)</span><br><span class="line"><span class="comment"># 只在指定目录下查找头文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)</span><br><span class="line"><span class="comment"># 只在指定目录下查找依赖包</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(</span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/<span class="keyword">include</span></span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_DIR&#125;</span>/arm-none-linux-gnueabi/sys-root/usr/<span class="keyword">include</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_INCLUDE_PATH </span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_INCLUDE&#125;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_LIBRARY_PATH </span><br><span class="line">    <span class="variable">$&#123;TOOL_CHAIN_LIB&#125;</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/7.CMake交叉编译/" data-id="cjejklggk000cv2jxm9ac488z" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-6.CMake FindXXXX.cmake" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/6.CMake FindXXXX.cmake/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.268Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CMake-Findxxxx-cmake"><a href="#CMake-Findxxxx-cmake" class="headerlink" title="CMake Findxxxx.cmake"></a>CMake Findxxxx.cmake</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>很多情况下编译项目需要链接第三方库，此时需要知道第三方库的以下信息：</p>
+<ul>
+<li>.h头文件的地址</li>
+<li>动态库.so或者静态库.a文件的地址</li>
+<li>链接的库的名字</li>
+</ul>
+<h2 id="常用库"><a href="#常用库" class="headerlink" title="常用库"></a>常用库</h2><p>有些常用的库会提供一个<code>FindXXXX.cmake</code>文件，此时我们只需要使用以下命令(以<code>log4cpp</code>为例)</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加REQUIRED参数来表示这是必须的依赖库</span></span><br><span class="line"><span class="keyword">find_package</span>(LOG4CPP REQUIRED)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;LOG4CPP_INCLUDE_DIR&#125;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>为了能够包好多个Finder，需要组织以下目录结构以便之后添加相关module</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">├── CMakeLists.txt</span><br><span class="line">│   ├── cmake</span><br><span class="line">│   │   ├── modules                 # 用以存放FindXXXX.cmake</span><br><span class="line">│   │   │   └── FindLOG4CPP.cmake</span><br><span class="line">│   │   └── toolschain</span><br><span class="line">│   │       └── Tiny4412.cmake      # 用于存放toolschain.cmake</span><br></pre></td></tr></table></figure>
+<p>在顶层CMakeLists.txt中添加modules路径</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_MODULE_PATH </span><br><span class="line">    APPEND <span class="string">"$&#123;CMAKE_SOURCE_DIR&#125;/cmake/modules/"</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<h2 id="FindXXXX-cmake"><a href="#FindXXXX-cmake" class="headerlink" title="FindXXXX.cmake"></a>FindXXXX.cmake</h2><p>有些时候，一些库并没有提供CMake模块文件，或者使用<code>makefile</code>进行编译，就需要手写Finder了，建立<code>./cmake/modules/</code>目录，用以存放本项目使用到的Finder。(依旧以log4cpp为例)建立一个名为<code>FindLOG4CPP.cmake</code>的文件，内容如下</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># - Find Log4cpp</span></span><br><span class="line"><span class="comment"># Find the native LOG4CPP includes and library</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  LOG4CPP_INCLUDE_DIRS - where to find LOG4CPP.h, etc.</span></span><br><span class="line"><span class="comment">#  LOG4CPP_LIBRARIES   - List of libraries when using LOG4CPP.</span></span><br><span class="line"><span class="comment">#  LOG4CPP_FOUND       - True if LOG4CPP found.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断是否已经包含log4cpp</span></span><br><span class="line"><span class="keyword">if</span> (LOG4CPP_INCLUDE_DIR)</span><br><span class="line">    <span class="keyword">set</span>(LOG4CPP_FIND_QUIETLY <span class="keyword">TRUE</span>)</span><br><span class="line"><span class="keyword">endif</span> ()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找头文件位置</span></span><br><span class="line"><span class="comment"># PATH_SUFFIXES 路径后缀，正常安装的log4cpp位于系统路径/log4cpp/文件夹下</span></span><br><span class="line"><span class="keyword">find_path</span>(LOG4CPP_INCLUDE_DIR</span><br><span class="line">    NAMES Category.hh</span><br><span class="line">    <span class="comment"># 可以通过以下命令来手动制定查找路径</span></span><br><span class="line">    <span class="comment"># PATHS /usr/local/include</span></span><br><span class="line">    PATH_SUFFIXES log4cpp</span><br><span class="line">    DOC <span class="string">"Log4cpp include directories"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找库文件位置</span></span><br><span class="line"><span class="keyword">find_library</span>(LOG4CPP_LIBRARY</span><br><span class="line">    NAMES log4cpp</span><br><span class="line">    DOC <span class="string">"Log4cpp library"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时找到头文件位置和库文件位置时给相关变量赋值</span></span><br><span class="line"><span class="keyword">if</span> (LOG4CPP_INCLUDE_DIR <span class="keyword">AND</span> LOG4CPP_LIBRARY)</span><br><span class="line">    <span class="keyword">set</span>(LOG4CPP_FOUND <span class="keyword">TRUE</span>)</span><br><span class="line">    <span class="keyword">set</span>(LOG4CPP_LIBRARIES <span class="variable">$&#123;LOG4CPP_LIBRARY&#125;</span>)</span><br><span class="line">    <span class="keyword">set</span>(LOG4CPP_INCLUDE_DIRS <span class="variable">$&#123;LOG4CPP_INCLUDE_DIR&#125;</span>)</span><br><span class="line"><span class="keyword">else</span> ()</span><br><span class="line">    <span class="keyword">set</span>(LOG4CPP_FOUND <span class="keyword">FALSE</span>)</span><br><span class="line">    <span class="keyword">message</span>(WARNING <span class="string">"LOG4CPP not found"</span>)</span><br><span class="line"><span class="keyword">endif</span> ()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印一些错误信息</span></span><br><span class="line"><span class="keyword">if</span> (LOG4CPP_FOUND)</span><br><span class="line">    <span class="keyword">if</span> (NOT LOG4CPP_FIND_QUIETLY)</span><br><span class="line">        <span class="keyword">message</span>(STATUS <span class="string">"Found LOG4CPP: $&#123;LOG4CPP_LIBRARIES&#125;"</span>)</span><br><span class="line">    <span class="keyword">endif</span> ()</span><br><span class="line"><span class="keyword">else</span> ()</span><br><span class="line">    <span class="keyword">if</span> (LOG4CPP_FIND_REQUIRED)</span><br><span class="line">        <span class="keyword">message</span>(STATUS <span class="string">"Looked for LOG4CPP libraries named $&#123;LOG4CPPS_NAMES&#125;."</span>)</span><br><span class="line">        <span class="keyword">message</span>(FATAL_ERROR <span class="string">"Could NOT find LOG4CPP library"</span>)</span><br><span class="line">    <span class="keyword">endif</span> ()</span><br><span class="line"><span class="keyword">endif</span> ()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这个选项不是很懂，貌似是给cmake gui用的</span></span><br><span class="line"><span class="keyword">mark_as_advanced</span>(</span><br><span class="line">    LOG4CPP_LIBRARIES</span><br><span class="line">    LOG4CPP_INCLUDE_DIRS</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>此时只需要按照常用库的方法将相关变量写入<code>include_directories</code>即可，在生成可执行文件时链接</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(test test.cc)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(test <span class="variable">$&#123;LOG4CPP_LIBRARIES&#125;</span>)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/6.CMake FindXXXX.cmake/" data-id="cjejklggj000bv2jxlbn0vwr9" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-5.ALSA录放音" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/5.ALSA录放音/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.268Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>高级 Linux 声音体系（Advanced Linux Sound Architecture，ALSA）是Linux中提供声音设备驱动的内核组件，用来代替原来的开放声音系统（Open Sound System，OSSv3）。除了声音设备驱动，ALSA还包含一个用户空间的函数库，开发者可以通过这些高级 API 使用驱动，不必直接与内核驱动进行交互<a href="https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">(1)</a>)。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install libasound2-dev</span><br></pre></td></tr></table></figure>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><ul>
+<li>打开设备</li>
+<li>分配参数内存</li>
+<li>填充默认参数</li>
+<li>设置参数(详细的参见<a href="http://magodo.github.io/audio/2016/04/14/alsa-pcm.html" target="_blank" rel="noopener">ALSA - PCM接口</a>)<ul>
+<li>通道数</li>
+<li>采样率(码率，用来指定时间和文件大小，frames/s)</li>
+<li>帧数(每次读取的数据长度与该参数有关)</li>
+<li>数据格式(影响输出数据、缓存大小)</li>
+<li>设备访问类型(直接读写、内存映射，交错模式、非交错模式)</li>
+</ul>
+</li>
+<li>读取、写入数据<h1 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h1></li>
+<li><p>包含头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;alsa/asoundlib.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看设备，根据最后两个数字确定设备名称，通常default就行了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aplay -L</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义相关参数，录放音都要经过相同的步骤，放一起定义</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设备名称，这里采用默认，还可以选取"hw:0,0","plughw:0,0"等</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *device = <span class="string">"default"</span>;</span><br><span class="line"><span class="comment">// 设备句柄</span></span><br><span class="line"><span class="comment">// 以下均定义两个，根据前缀区分，c-&gt;capture,p-&gt;playback,没有前缀的表示参数相同</span></span><br><span class="line"><span class="keyword">snd_pcm_t</span> *chandle;</span><br><span class="line"><span class="keyword">snd_pcm_t</span> *phandle;</span><br><span class="line"><span class="comment">// 硬件参数</span></span><br><span class="line"><span class="keyword">snd_pcm_hw_params_t</span> *cparams;</span><br><span class="line"><span class="keyword">snd_pcm_hw_params_t</span> *pparams;</span><br><span class="line"><span class="comment">// 数据访问类型，读写方式：内存映射或者读写，数据</span></span><br><span class="line"><span class="keyword">snd_pcm_access_t</span> access_type = SND_PCM_ACCESS_RW_INTERLEAVED;</span><br><span class="line"><span class="comment">// 格式，</span></span><br><span class="line"><span class="keyword">snd_pcm_format_t</span> format = SND_PCM_FORMAT_S16_LE;</span><br><span class="line"><span class="comment">// 码率，采样率,8000Hz,44100Hz</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> rate = <span class="number">44100</span>;</span><br><span class="line"><span class="comment">// 通道数</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> channels = <span class="number">2</span>;</span><br><span class="line"><span class="comment">// 帧数，这里取32</span></span><br><span class="line"><span class="keyword">snd_pcm_uframes_t</span> frames = <span class="number">32</span>;</span><br><span class="line"><span class="comment">// 以下为可选参数</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> bytes_per_frame;</span><br><span class="line"><span class="comment">// 软件重采样</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> soft_resample;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开设备</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">snd_pcm_open(&amp;chandle, device, SND_PCM_STREAM_CAPTURE, <span class="number">0</span>);</span><br><span class="line">snd_pcm_open(&amp;phandle, device, SND_PCM_STREAM_PLAYBACK, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>增加一个错误判断<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> err;</span><br><span class="line"><span class="keyword">if</span> ((err = snd_pcm_open(&amp;chandle, device, SND_PCM_STREAM_CAPTURE, <span class="number">0</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Capture device open failed."</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ((err = snd_pcm_open(&amp;phandle, device, SND_PCM_STREAM_PLAYBACK, <span class="number">0</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Playback device open failed."</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>设置参数，这里就不增加错误判断了，不然显得有些长了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先计算每帧数据的大小</span></span><br><span class="line">bytes_per_frame = snd_pcm_format_width(format) / <span class="number">8</span> * <span class="number">2</span>;</span><br><span class="line"><span class="comment">// 计算需要分配的缓存空间的大小</span></span><br><span class="line">buffer_size = frames * bytes_per_frame;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为参数分配空间</span></span><br><span class="line">snd_pcm_hw_params_alloca(&amp;params);</span><br><span class="line"><span class="comment">// 填充参数空间</span></span><br><span class="line">snd_pcm_hw_params_any(handle, params);</span><br><span class="line"><span class="comment">// 设置数据访问方式</span></span><br><span class="line">snd_pcm_hw_params_set_access(handle, params, access_type);</span><br><span class="line"><span class="comment">// 设置格式</span></span><br><span class="line">snd_pcm_hw_params_set_format(handle, params, format);</span><br><span class="line"><span class="comment">// 设置通道</span></span><br><span class="line">snd_pcm_hw_params_set_channels(handle, params, channels);</span><br><span class="line"><span class="comment">// 设置采样率</span></span><br><span class="line">snd_pcm_hw_params_set_rate_near(handle, params, &amp;rate, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可选项，不改不影响</span></span><br><span class="line"><span class="comment">// 设置缓存大小</span></span><br><span class="line">buffer_size = period_size * <span class="number">2</span>;</span><br><span class="line">snd_pcm_hw_params_set_buffer_size_near(handle, params, &amp;buffer_size);</span><br><span class="line"><span class="comment">// 设置段大小，period与OSS中的segment类似</span></span><br><span class="line">period_size = buffer_size / <span class="number">2</span>;</span><br><span class="line">snd_pcm_hw_params_set_period_size_near(handle, params, &amp;period_size, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置参数</span></span><br><span class="line">snd_pcm_hw_params(handle, params);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读写数据</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分配缓存空间，大小上面通过buffer_size计算出了</span></span><br><span class="line"><span class="keyword">char</span> *buffer = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(buffer_size);</span><br><span class="line"><span class="comment">// 读写数据</span></span><br><span class="line">snd_pcm_readi(chandle, buffer, frames);</span><br><span class="line">snd_pcm_writei(phandle, buffer, frames);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>循环播放</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	snd_pcm_readi(chandle, buffer, frames);</span><br><span class="line">	snd_pcm_writei(phandle, buffer, frames);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>捕获一定时间的音频数据到文件流</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ofstream <span class="title">output</span><span class="params">(<span class="string">"test.pcm"</span>, ios::trunc)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> loop_sec;</span><br><span class="line"><span class="keyword">int</span> frames_readed;</span><br><span class="line">loop_sec = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> loop_limit;</span><br><span class="line"><span class="comment">// 计算循环大小</span></span><br><span class="line">loop_limit = loop_sec * rate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; loop_limit; )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 这里还需要判断一下返回值是否为负</span></span><br><span class="line">	frames_readed = snd_pcm_readi(chandle, buffer, frames);</span><br><span class="line">	output.write(buffer, buffer_size);</span><br><span class="line">	i += frames_readed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭设备、释放指针</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">snd_pcm_close(chandle);</span><br><span class="line">snd_pcm_close(phandle);</span><br><span class="line"><span class="built_in">free</span>(buffer);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="封装一下"><a href="#封装一下" class="headerlink" title="封装一下"></a>封装一下</h1><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ul>
+<li><strong>[已解决]</strong> 录放音过程中出现高音，多半是读写设备是缓存大小设置的问题。</li>
+<li><p><strong>[已解决]</strong> 放音过程中也许会出现”Broken pipe”的错误，添加如下需要重新准备设备</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">err = snd_pcm_writei(handle, input_buffer, frames);</span><br><span class="line"><span class="keyword">if</span> (err == -EPIPE)</span><br><span class="line">&#123;</span><br><span class="line">	snd_pcm_prepare(handle);</span><br><span class="line">	<span class="keyword">continue</span>;</span><br><span class="line">	<span class="comment">// 或者</span></span><br><span class="line">	<span class="comment">// return 0;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>[未解决]</strong> 如果录音之后立即放音，开始不会有延时，但是时间长了以后延时会累加。</p>
+<h1 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h1></li>
+<li><a href="https://github.com/Pokerpoke/Ras_node/blob/master/an-core/lib/voice_base.cc" target="_blank" rel="noopener">github–Ras_Node</a></li>
+<li><a href="https://www.alsa-project.org/alsa-doc/alsa-lib/examples.html" target="_blank" rel="noopener">官方例程</a></li>
+<li><a href="http://magodo.github.io/audio/2016/04/14/alsa-pcm.html" target="_blank" rel="noopener">ALSA - PCM接口</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/5.ALSA录放音/" data-id="cjejklggi000av2jxnnbxngmx" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-1.自然辩证法概论小论文" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.自然辩证法概论小论文/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.264Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="中医是否是科学？"><a href="#中医是否是科学？" class="headerlink" title="中医是否是科学？"></a>中医是否是科学？</h1><h2 id="1-什么是科学"><a href="#1-什么是科学" class="headerlink" title="1.什么是科学"></a>1.什么是科学</h2><p>科学（英语：Science，希腊语：Επιστήμη）是通过经验实证的方法，对现象（原来指自然现象，现泛指包括社会现象等现象）进行归因的学科。科学活动所得的知识是条件明确的（不能模棱两可或随意解读）、能经得起检验的，而且不能与任何适用范围内的已知事实产生矛盾。科学原仅指对自然现象之规律的探索与总结，但人文学科也被越来越多地冠以“科学”之名。人们习惯根据研究对象的不同把科学划分为不同的类别，传统的自然科学主要有生物学、物理学、化学、地质学和天文学。逻辑学和数学的地位比较特殊，它们是其它一切科学的论证基础和工具。<br>科学在认识自然的不同层面上设法解决各种具体的问题，强调预测结果的具体性和可证伪性，这有别于空泛的哲学。科学也不等同于寻求绝对无误的真理，而是在现有基础上，摸索式地不断接近真理。故科学的发展史就是一部人类对自然界的认识偏差的纠正史。因此“科学”本身要求对理论要保持一定的怀疑性，因此它绝不是“正确”的同义词。</p>
+<h2 id="2-什么是中医"><a href="#2-什么是中医" class="headerlink" title="2.什么是中医"></a>2.什么是中医</h2><p>按照中国全国科学技术名词审定委员会审定的名词，中医学是“以中医药理论与实践经验为主体，研究人类生命活动中健康与疾病转化规律及其预防、诊断、治疗、康复和保健的综合性科学”。二十世纪以来因应时代的需求，在西方科学方法引入后，部分疗法不但引起了现代医学的兴趣，中医的大夫养成也从学徒制度，转趋于专业化、学术化、国际化，这种经过世界主流医界所认证的“中医药学科的专业职业队伍”称中医师，也称“科学中医”。2017年，中国首部中医药法施行。<br>中医学以阴阳五行作为理论基础，将人体看成是气、形、神的统一体，通过望、闻、问、切，四诊合参的方法，探求病因、病性、病位、分析病机及人体内五脏六腑、经络关节、气血津液的变化、判断邪正消长，进而得出病名，归纳出证型，以辨证论治原则，制定“汗、吐、下、和、温、清、补、消”等治法，使用中药、针灸、跌打、推拿、按摩、拔罐、气功、食疗等多种治疗手段，使人体达到阴阳调和而康复。中医治疗的积极面在于希望可以协助恢复人体的阴阳平衡，而消极面则是希望当必须使用药物来减缓疾病的恶化时，还能兼顾生命与生活的品质。此外，中医学的最终目标并不仅止于治病，更进一步是帮助人类达到如同在《黄帝内经》中所提出的四种典范人物，即真人、至人、圣人、贤人的境界。<br>中医的正确定位应该是“中国古代医疗技术”，是一门经验学。</p>
+<h2 id="3-为什么说中医不是科学"><a href="#3-为什么说中医不是科学" class="headerlink" title="3.为什么说中医不是科学"></a>3.为什么说中医不是科学</h2><p>科学讲究创新，不崇古。现代医学的学生除非是本人对医学史感兴趣，否则没有人会去研读希波克拉底、盖伦、维苏里、哈维等等历代医学大家的著作，不熟悉经典著作丝毫也不影响他们行医。现代医学的论文也没有人会把前贤语录当论据，靠引经据典来证明自己的正确性。中医则不然，《黄帝内经》、《伤寒论》、《金匮要略》等古代文献是中医学生必读、必背、必信的至高无上的经典，是他们诊断、处方的依据，中医的论文往往只是对这些经典的阐明、验证。中药是一套非常固定的方法论，所以很难有改进的机会，如果改进了，那就是现代科学了。虽然有很多人一直在研究分析中医，但是他们之中很多人并不愿意接受科学性的思想。证据在他们面前，还觉得需要保护包容古代思想更有价值，忽略证据找借口，这是“不科学”的定义所在。</p>
+<p>科学是一个完整的知识体系，各个学科都相互联系、统一在一起，不存在一个与其他学科都无联系、甚至相互冲突的独立科学学科。现代医学建立在生物学基础之上，而生物学又建立在物理、化学的基础之上。但是中医不仅在整体上（而不仅仅是个别细节）与现代医学不兼容，也与生物学、化学、物理学不兼容，它对抗的不仅仅是现代医学，而是整个现代科学体系。一定意义上来说，中医主流是看不起经验的，他们常常鄙视建立在经验基础上的民间偏方，他们更愿意相信建立在阴阳五行相生相克的玄学基础上的臆想，这样的东西，可以是与科学无关的哲学、玄学或别的什么东西，但是不可能是科学。</p>
+<p>从中药方面来看，一个药品必须经过严格测试，才有权威的空间，才有资格在药品市场中竞争。药品测试，已经是一个很成熟完善的行业，但是使用中药以后，会发现：有很多中药是高效率的，也有一些不是，在特定情况下并不能完全发挥该药的效用，一个药品或一个疗法的价值完全取决于它的实际效率。很多人说现代药的副作用比较多，但是大部分现代药的副作用是标明清楚的。传统药里面副作用很多写的是副作用不详。中医也应该先根据这国际标准严谨测试。任何一种药都是化学品组成的。草药等等里面的化学成分就更多更杂了，所以必须研究更深；中药必须承担这个最基本的责任。只有先做到这点，中医中药才可能成为一门科学。</p>
+<p>说到底，中医是一门经验学，中药同样也是，通过长久以来的药效观察，来确定药物效果。但同样也止步于药效，而不深入到机理，或者说机理基于不被现代科学认可的假象理论。</p>
+<h2 id="4-中医以另一种方式存在于科学之中"><a href="#4-中医以另一种方式存在于科学之中" class="headerlink" title="4.中医以另一种方式存在于科学之中"></a>4.中医以另一种方式存在于科学之中</h2><p>最基本的科学思维的原理就是：任何东西都可能是错的，一切都在等待更好的更全面的解释。如果中医能够吸收现代医学严谨的实验、测试方法，量化治疗效率，明确副作用，摆脱阴阳五行等桎梏，就能突破“古代医疗技术”、经验学成为一门真正的科学。<br>以西医而言，科学严谨的基础学科是他的优点，也是他的桎梏。不管是手术还是用药还是其他的治疗方式。西医都有非常严谨的适应症和禁忌症。这就意味着，在大部分情况下，无法鉴别某些病，或者某些特发性的病症时，没有办法确诊病因和疾病，是很难做出有效治疗的，甚至没法治疗。而中医作为一门经验学，这时候就呈现出了相对优势：我不知道你这病的病因是什么，根据的经验，你这些症状用某种药物治疗可能可以控制病情，具体原理也不知道，以前有很多治疗成功的案例。这放在西医是几乎不可能出现的，不确定机制，又没经过实验验证，是完全无法用于临床的。</p>
+<p>某个疗法得到证明了，整个世界就不得不承认这个东西的价值。可是这个东西已经属于全人类了。他的历史背景是中药，所以是来自中国的大贡献，这点不能忘记。但它已成为世界科学医学前锋的一份，就变成是现代药了。<br>一个中药得到有疗效的证据以后，科学家都努力研究出它的具体哪个成分最有用。然后研究这个成分到细胞里面的真实化学作用。分析这化学品与各种基因各种蛋白质的关系，到最后迟早会被做成最简易最高效率的一颗药片。有多少现代药是这样的背景来历？几乎所有的现代药的最初原型都来自世界某个地方的某种当地传统药。中医中有很多药、很多成分都以这种方式存在于现代药之中，可以理解为中医以另一种方式存在与科学之中。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.自然辩证法概论小论文/" data-id="cjejklgge0008v2jxcnwbtola" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-4.使用Doxygen生成函数调用关系图" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/4.使用Doxygen生成函数调用关系图/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.264Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Doxygen是一种开源跨平台的，以类似JavaDoc风格描述的文档系统，完全支持C、C++、Java、Objective-C和IDL语言，部分支持PHP、C#。注释的语法与Qt-Doc、KDoc和JavaDoc兼容。Doxygen可以从一套归档源文件开始，生成HTML格式的在线类浏览器，或离线的LATEX、RTF参考手册。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Ubuntu下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install doxygen</span><br></pre></td></tr></table></figure>
+<p>Doxygen使用graphviz来产生调用关系图</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install graphviz</span><br></pre></td></tr></table></figure>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>在项目目录执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doxygen -g</span><br></pre></td></tr></table></figure>
+<p>来生成一个Doxyfile,修改其中的下列行改变生成目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OUTPUT_DIRECTORY       = ./doc</span><br></pre></td></tr></table></figure>
+<p>修改语言</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OUTPUT_LANGUAGE        = Chinese</span><br></pre></td></tr></table></figure>
+<p>之后运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doxygen Doxyfile</span><br></pre></td></tr></table></figure>
+<p>即可在<code>doc</code>目录下生成一个<code>html</code>和<code>latex</code>目录，双击<code>html</code>目录中的index.html即可看到说明文档。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/4.使用Doxygen生成函数调用关系图/" data-id="cjejklggf0009v2jxdcrhmrhl" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-1.树莓派SSH无法登陆" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.树莓派SSH无法登陆/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.260Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="树莓派SSH无法登陆"><a href="#树莓派SSH无法登陆" class="headerlink" title="树莓派SSH无法登陆"></a>树莓派SSH无法登陆</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>貌似从2016.11以后的树莓派镜像默认关闭了ssh远程登陆，刷入镜像后登陆会显示以下信息:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host 192.168.199.123 port 22: Connection refused</span><br></pre></td></tr></table></figure>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>刷入镜像以后在<code>/boot</code>目录下新建一个<code>ssh</code>的空白文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch ssh</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.树莓派SSH无法登陆/" data-id="cjejklggc0006v2jxtalja27c" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-1.使用cmake来构建项目" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.使用cmake来构建项目/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.252Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="关于CMake"><a href="#关于CMake" class="headerlink" title="关于CMake"></a>关于CMake</h1><p>CMake 是一个跨平台的自动化建构系统,它使用一个名为 CMakeLists.txt 的文件来描述构建过程,可以产生标准的构建文件,如 Unix 的 Makefile 或Windows Visual C++ 的 projects/workspaces 。文件 CMakeLists.txt 需要手工编写,也可以通过编写脚本进行半自动的生成。CMake 提供了比 autoconfig 更简洁的语法。—<a href="https://cmake.org/Wiki/CMake" target="_blank" rel="noopener">CMake Wiki</a></p>
+<h2 id="安装CMake"><a href="#安装CMake" class="headerlink" title="安装CMake"></a>安装CMake</h2><p>cmake包含在ubunu源中，直接apt安装即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install cmake</span><br></pre></td></tr></table></figure>
+<h2 id="使用CMake"><a href="#使用CMake" class="headerlink" title="使用CMake"></a>使用CMake</h2><p>网上下载的许多项目都需要CMake来编译，进入项目文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>至此，已能运行，如果需要安装进系统中，则可以执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="使用CMake来构建项目"><a href="#使用CMake来构建项目" class="headerlink" title="使用CMake来构建项目"></a>使用CMake来构建项目</h2><p>使用CMake的目录结构可以如下，每个目录下均需要一个CMakeLists.txt文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---project</span><br><span class="line">------lib</span><br><span class="line">---------a.c</span><br><span class="line">---------b.c</span><br><span class="line">---------CMakeLists.txt</span><br><span class="line">------include</span><br><span class="line">---------a.h</span><br><span class="line">---------b.h</span><br><span class="line">---------CMakeLists.txt</span><br><span class="line">---main.c</span><br><span class="line">---CMakeLists.txt</span><br></pre></td></tr></table></figure>
+<p>其中最上层CMakeLists.txt文件内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>项目名称</span><br><span class="line">project(main)</span><br><span class="line"><span class="meta">#</span>需要的CMake最低版本</span><br><span class="line">cmake_minium_required(VERSION 2.6)</span><br><span class="line"><span class="meta">#</span>将目录下的所有文件名赋值给DIR_SRC变量</span><br><span class="line">aux_source_directories(. DIR_SRC)</span><br><span class="line"><span class="meta">#</span>添加include文件夹，存放头文件</span><br><span class="line">include_directories(include)</span><br><span class="line"><span class="meta">#</span>生成可执行文件</span><br><span class="line">add_executable(main $&#123;DIR_SRC&#125;)</span><br><span class="line"><span class="meta">#</span>添加子目录</span><br><span class="line">add_subdirectory(lib)</span><br><span class="line"><span class="meta">#</span>将生成文件与动态库链接</span><br><span class="line">target_link_libraries(main test)</span><br></pre></td></tr></table></figure>
+<p>/lib/CMakeLists.txt</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>赋值</span><br><span class="line">aux_source_directories(. DIR_TEST_DIR)</span><br><span class="line"><span class="meta">#</span>生成动态库，也可以生成静态库，暂时没用到，用到再研究</span><br><span class="line">add_library(test $&#123;DIR_TEST_DIR&#125;)</span><br></pre></td></tr></table></figure>
+<p>/include/CMakeLists.txt文件可以为空，有公共库可以用<code>install {file name}</code>来添加进系统。</p>
+<h2 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h2><p>如果程序没有问题，通过上一步的编译即可在<code>build</code>文件夹下生成可执行文件<code>main</code>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.使用cmake来构建项目/" data-id="cjejklggb0005v2jxuoj62pm3" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-1.树莓派+nginx+php" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.树莓派+nginx+php/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.252Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="树莓派-nginx-php建站"><a href="#树莓派-nginx-php建站" class="headerlink" title="树莓派+nginx+php建站"></a>树莓派+nginx+php建站</h1><p>Setup a webpage on Raspberry by nginx and php.</p>
+<h2 id="1-更新软件源"><a href="#1-更新软件源" class="headerlink" title="1.更新软件源"></a>1.更新软件源</h2><p>update the list of softwares<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-安装nginx和php"><a href="#2-安装nginx和php" class="headerlink" title="2.安装nginx和php"></a>2.安装nginx和php</h2><p>install nginx and php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nginx</span><br><span class="line">sudo apt install php</span><br></pre></td></tr></table></figure></p>
+<p>也能使用以下命令<br>also,can use these commands<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install php5</span><br></pre></td></tr></table></figure></p>
+<p>关于php版本的问题，php5比php7更加稳定。<br>It looks like that php5 is more stable than php7.<br>More information on this site: [php.net][]<br>[php.net]:<a href="http://php.net/manual/zh/index.php" target="_blank" rel="noopener">http://php.net/manual/zh/index.php</a></p>
+<h2 id="3-配置nginx"><a href="#3-配置nginx" class="headerlink" title="3.配置nginx"></a>3.配置nginx</h2><p>Setup nginx.<br>nginx的配置文件存放在/etc/nginx/sites-available目录下。<br>只需要修改该目录下的default配置即可<br>The configurations of nginx are in /etc/nginx/sites-available.<br>Just need to edit the default to configure.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/nginx/sites-available</span><br><span class="line">sudo vim default</span><br></pre></td></tr></table></figure></p>
+<p>根据提示添加index.php,取消php配置前的注释。<br>Add “index.php” to the below line and unmark the configurations of php.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Add index.php to the list if you are using PHP</span><br><span class="line">index index.html index.htm index.nginx-debian.html;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span><br><span class="line">	#</span><br><span class="line">	location ~ \.php$ &#123;</span><br><span class="line">		include snippets/fastcgi-php.conf;</span><br><span class="line"></span><br><span class="line">		# With php5-cgi alone:</span><br><span class="line">	#	fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">		# With php5-fpm:</span><br><span class="line">		fastcgi_pass unix:/var/run/php5-fpm.sock;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>现在你可以使用其他电脑访问http://&lt;你的树莓派ip&gt;来访问树莓派了。<br>Now we can browse the site from other computers via “http://<your raspberry="" ip="">“.<br>It looks like this.</your></p>
+<h2 id="4-主页"><a href="#4-主页" class="headerlink" title="4.主页"></a>4.主页</h2><p>Index.<br>主页存放目录为/var/www/html/，删除其他文件，创建一个php文件。<br>The index site is in the /var/www/html/,you can remove other documents and creat index.php.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>现在访问树莓派的ip就能看到php的信息了。<br>Now go ahead to http://<your raspberry="" ip=""> or just input your raspberry ip in the adress in the browse.<br>Enjoy!</your></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.树莓派+nginx+php/" data-id="cjejklgga0004v2jxcdmopf97" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-1.树莓派openwrt+ipv6尝试[失败]" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.树莓派openwrt+ipv6尝试[失败]/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.252Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="树莓派openwrt-ipv6尝试"><a href="#树莓派openwrt-ipv6尝试" class="headerlink" title="树莓派openwrt+ipv6尝试"></a>树莓派openwrt+ipv6尝试</h1><p>A attempt about flashing openwrt to RaspberryPi and enable ipv6.</p>
+<h2 id="1-刷入openwrt"><a href="#1-刷入openwrt" class="headerlink" title="1.刷入openwrt"></a>1.刷入openwrt</h2><p>从网上发现树莓派能够刷入openwrt,同时科协技术部缺少一个能免费上网的东西，于是想使用树莓派刷入openwrt挂上shadowsocks来免费上网。<br>至于如何ipv6免费上网，可以参考我的这篇博客[校园ipv6免流量][]。<br>[校园ipv6免流量]: <a href="https://jpokerpoke.blogspot.com/2016/03/ipv6vpsshadowsocksproxierfier.html" target="_blank" rel="noopener">https://jpokerpoke.blogspot.com/2016/03/ipv6vpsshadowsocksproxierfier.html</a><br>I have seen many sites about how to flash openwrt to RaspberryPi.Also,the techology department of NWPU Science and Techology Association need a way to surf the internet free.So,i attempt to do something.<br>How to surf the internet free?You can view my blogger,[校园ipv6免流量][]。<br>[校园ipv6免流量]: <a href="https://jpokerpoke.blogspot.com/2016/03/ipv6vpsshadowsocksproxierfier.html" target="_blank" rel="noopener">https://jpokerpoke.blogspot.com/2016/03/ipv6vpsshadowsocksproxierfier.html</a></p>
+<p>下载openwrt镜像 <a href="https://openwrt.org/" title="openwrt" target="_blank" rel="noopener">openwrt</a>。<br>但是官方的有问题，wiki上写了支持树莓派3，没有bcm2710版本所以选择了lede项目组的镜像，下载地址 <a href="https://www.lede-project.org/" title="LEDE project" target="_blank" rel="noopener">LEDE project</a></p>
+<p>Download the image of openwrt <a href="https://openwrt.org/" title="openwrt" target="_blank" rel="noopener">openwrt</a>.<br>There some issues about official source. Also the wiki says it supports RaspberryPi 3B,but there is no version of bcm2710.So I choose the image of LEDE project <a href="https://openwrt.org/" title="openwrt" target="_blank" rel="noopener">openwrt</a>.</p>
+<p>写入openwrt镜像</p>
+<ul>
+<li><em>windows</em></li>
+</ul>
+<p>使用Win32DiskImager <a href="https://sourceforge.net/projects/win32diskimager/" target="_blank" rel="noopener">Download pages</a><br>Use Win32DiskImager <a href="https://sourceforge.net/projects/win32diskimager/" target="_blank" rel="noopener">Download pages</a></p>
+<ul>
+<li><em>Linux</em></li>
+</ul>
+<p>使用dd命令烧写镜像</p>
+<p>Use dd comand to flash.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=lede-brcm2708-bcm2710-rpi-3-ext4-sdcard.img of=/dev/sdb</span><br></pre></td></tr></table></figure>
+<h2 id="2-配置openwrt"><a href="#2-配置openwrt" class="headerlink" title="2.配置openwrt"></a>2.配置openwrt</h2><p>Set up openwrt.</p>
+<p>首先需要开启ssh服务和luci的web页面。<br>关于<a href="https://github.com/openwrt/luci/wiki" target="_blank" rel="noopener">luci</a>。</p>
+<p>First of all, turn on ssh service and luci.<br>About <a href="https://github.com/openwrt/luci/wiki" target="_blank" rel="noopener">luci</a>.</p>
+<p>因为openwrt默认没有开启ssh服务，所以没法远程登陆=。=，还好我有个显示屏可以用。</p>
+<p>By default, the ssh service isn’t enable. So, there’s no way to login by ssh. Fortunately, I have a lcd display.</p>
+<p>两种方法开启ssh服务。</p>
+<p>Two ways to enable ssh service.</p>
+<ul>
+<li>直接关闭防火墙</li>
+</ul>
+<p>Turn off the firewall.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/firewall stop</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改防火墙配置</li>
+</ul>
+<p>Edit the document of firewall.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/config/firewall</span><br><span class="line"><span class="meta">#</span> 通过搜索直接找到ssh命令所在行，取消注释就行</span><br><span class="line"><span class="meta">#</span> Unmark the ssh lines by searching.</span><br><span class="line"><span class="meta">#</span> in vim use `\ssh`</span><br></pre></td></tr></table></figure>
+<p>安装luci。</p>
+<p>Install luci.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci</span><br></pre></td></tr></table></figure>
+<h2 id="3-进入浏览器配置路由器"><a href="#3-进入浏览器配置路由器" class="headerlink" title="3.进入浏览器配置路由器"></a>3.进入浏览器配置路由器</h2><p>Login the web to configure the router.</p>
+<p>纯图形化的界面，没啥说的了。<br>A easy interface , nothing to introduce.</p>
+<h2 id="4-问题"><a href="#4-问题" class="headerlink" title="4.问题"></a>4.问题</h2><p>Issues.</p>
+<p>如果在网线接口里面启用了dhcpv6协议，会只获得ipv6地址，并不会获得ipv4地址，而且无法连通，原因未知。你也没法使用ping6命令。</p>
+<p>If you enable dhcpv6 proto in interface , you will get a ipv6 address , but no ipv4  address . What’s more , you cannot use the ping6 commmand . Also , it cannot connect the internet . I don’t know the solution.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.树莓派openwrt+ipv6尝试[失败]/" data-id="cjejklggd0007v2jxd3pfmph6" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-1.使用 supervisor 管理进程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.使用 supervisor 管理进程/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.248Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用-supervisor-管理进程"><a href="#使用-supervisor-管理进程" class="headerlink" title="使用 supervisor 管理进程"></a>使用 supervisor 管理进程</h1><p><a href="http://supervisord.org" target="_blank" rel="noopener">Supervisor</a>是一个用 Python写的进程管理工具，可以很方便的用来启动、重启、关闭进程。除了对单个进程的控制，还可以同时启动、关闭多个进程，可以很方便的控制那些需要长期运行的进程，比如需要在服务器上长期运行的爬虫之类，会在程序出错以后自动重启。</p>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>ubuntu下apt安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install supervisor</span><br></pre></td></tr></table></figure>
+<p>pip安装方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install supervisor</span><br></pre></td></tr></table></figure>
+<h2 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h2><p>创建配置文件</p>
+<p>supervisor提供了一个快速产生配置文件的方法</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo_supervisord_conf &gt; /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+<p>如果没有root权限可以使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo_supervisord_conf &gt; supervisord.conf</span><br></pre></td></tr></table></figure>
+<p>在当前目录产生，然后用<code>supervisor -c supervisord.conf</code>来启动服务<br>查看 supervisord 是否在运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep supervisord</span><br></pre></td></tr></table></figure>
+<h2 id="3-应用配置"><a href="#3-应用配置" class="headerlink" title="3.应用配置"></a>3.应用配置</h2><p>至此，supervisor已经安装完成，下面需要将应用添加进去，可以在刚刚的生成文件中直接添加命令，但是不推荐这么做，推荐使用以下的做法。<br>在<code>supervisor.conf</code>中取消注释掉以下命令（一般位于结尾）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;[include]</span><br><span class="line">;files = relative/directory/*.ini</span><br></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[include]</span><br><span class="line">files = /etc/supervisor/*.ini</span><br></pre></td></tr></table></figure>
+<p>在<code>/etc</code>目录下创建<code>supervisor</code>文件夹，在其下建立<code>program.ini</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[program:serialrecv]</span><br><span class="line">directory = /home/jiang/program ; 程序的启动目录</span><br><span class="line">command = python serialrecv.py  ; 运行的指令</span><br><span class="line">autostart = true     ; 在 supervisord 启动的时候也自动启动</span><br><span class="line">startsecs = 5        ; 启动 5 秒后没有异常退出，就当作已经正常启动了</span><br><span class="line">autorestart = true   ; 程序异常退出后自动重启</span><br><span class="line">startretries = 3     ; 启动失败自动重试次数，默认是 3</span><br><span class="line">user = root          ; 用哪个用户启动</span><br><span class="line">redirect_stderr = true  ; 把 stderr 重定向到 stdout，默认 false</span><br><span class="line">stdout_logfile_maxbytes = 20MB  ; stdout 日志文件大小，默认 50MB</span><br><span class="line">stdout_logfile_backups = 20     ; stdout 日志文件备份数</span><br><span class="line">; stdout 日志文件，需要注意当指定目录不存在时无法正常启动，所以需要手动创建目录（supervisord 会自动创建日志文件）</span><br><span class="line">stdout_logfile = /data/logs/usercenter_stdout.log</span><br><span class="line"></span><br><span class="line">; 可以通过 environment 来添加需要的环境变量，一种常见的用法是修改 PYTHONPATH</span><br><span class="line">; environment=PYTHONPATH=$PYTHONPATH:/path/to/somewhere</span><br></pre></td></tr></table></figure>
+<p>启动supervisor</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo supervisord</span><br></pre></td></tr></table></figure>
+<p>监控应用运行情况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo supervisorctl</span><br></pre></td></tr></table></figure>
+<p>显示如下界面</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">supdervisor&gt;</span></span><br></pre></td></tr></table></figure>
+<p>运行<code>status</code>可以看到应用运行状态，<code>start &lt;program name&gt;</code>可以启动应用，<code>stop &lt;program name&gt;</code>停止应用，<code>start all</code>和<code>stop all</code>可以启动和停止所有应用。</p>
+<h2 id="4-问题"><a href="#4-问题" class="headerlink" title="4.问题"></a>4.问题</h2><ol>
+<li>可能会遇到<code>unix:///tmp/supervisor.sock not found</code>，重新启动supervisord<code>sudo supervisord</code>即可</li>
+<li>无法开机启动，在<code>/etc/rc.local</code>添加启动命令<code>sudo supervisord</code>于<code>exit 0</code>之前即可。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.使用 supervisor 管理进程/" data-id="cjejklgg90003v2jxbr3shsq4" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

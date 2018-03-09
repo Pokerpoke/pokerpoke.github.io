@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介高级 Linux 声音体系（Advanced Linux Sound Architecture，ALSA）是Linux中提供声音设备驱动的内核组件，用来代替原来的开放声音系统（Open Sound System，OSSv3）。除了声音设备驱动，ALSA还包含一个用户空间的函数库，开发者可以通过这些高级 API 使用驱动，不必直接与内核驱动进行交互(1))。 安装1sudo apt instal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/2018/03/08/5.ALSA录放音/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介高级 Linux 声音体系（Advanced Linux Sound Architecture，ALSA）是Linux中提供声音设备驱动的内核组件，用来代替原来的开放声音系统（Open Sound System，OSSv3）。除了声音设备驱动，ALSA还包含一个用户空间的函数库，开发者可以通过这些高级 API 使用驱动，不必直接与内核驱动进行交互(1))。 安装1sudo apt instal">
+<meta property="og:updated_time" content="2017-09-25T15:52:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="简介高级 Linux 声音体系（Advanced Linux Sound Architecture，ALSA）是Linux中提供声音设备驱动的内核组件，用来代替原来的开放声音系统（Open Sound System，OSSv3）。除了声音设备驱动，ALSA还包含一个用户空间的函数库，开发者可以通过这些高级 API 使用驱动，不必直接与内核驱动进行交互(1))。 安装1sudo apt instal">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-5.ALSA录放音" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/5.ALSA录放音/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.268Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>高级 Linux 声音体系（Advanced Linux Sound Architecture，ALSA）是Linux中提供声音设备驱动的内核组件，用来代替原来的开放声音系统（Open Sound System，OSSv3）。除了声音设备驱动，ALSA还包含一个用户空间的函数库，开发者可以通过这些高级 API 使用驱动，不必直接与内核驱动进行交互<a href="https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">(1)</a>)。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install libasound2-dev</span><br></pre></td></tr></table></figure>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><ul>
+<li>打开设备</li>
+<li>分配参数内存</li>
+<li>填充默认参数</li>
+<li>设置参数(详细的参见<a href="http://magodo.github.io/audio/2016/04/14/alsa-pcm.html" target="_blank" rel="noopener">ALSA - PCM接口</a>)<ul>
+<li>通道数</li>
+<li>采样率(码率，用来指定时间和文件大小，frames/s)</li>
+<li>帧数(每次读取的数据长度与该参数有关)</li>
+<li>数据格式(影响输出数据、缓存大小)</li>
+<li>设备访问类型(直接读写、内存映射，交错模式、非交错模式)</li>
+</ul>
+</li>
+<li>读取、写入数据<h1 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h1></li>
+<li><p>包含头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;alsa/asoundlib.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看设备，根据最后两个数字确定设备名称，通常default就行了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aplay -L</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义相关参数，录放音都要经过相同的步骤，放一起定义</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设备名称，这里采用默认，还可以选取"hw:0,0","plughw:0,0"等</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *device = <span class="string">"default"</span>;</span><br><span class="line"><span class="comment">// 设备句柄</span></span><br><span class="line"><span class="comment">// 以下均定义两个，根据前缀区分，c-&gt;capture,p-&gt;playback,没有前缀的表示参数相同</span></span><br><span class="line"><span class="keyword">snd_pcm_t</span> *chandle;</span><br><span class="line"><span class="keyword">snd_pcm_t</span> *phandle;</span><br><span class="line"><span class="comment">// 硬件参数</span></span><br><span class="line"><span class="keyword">snd_pcm_hw_params_t</span> *cparams;</span><br><span class="line"><span class="keyword">snd_pcm_hw_params_t</span> *pparams;</span><br><span class="line"><span class="comment">// 数据访问类型，读写方式：内存映射或者读写，数据</span></span><br><span class="line"><span class="keyword">snd_pcm_access_t</span> access_type = SND_PCM_ACCESS_RW_INTERLEAVED;</span><br><span class="line"><span class="comment">// 格式，</span></span><br><span class="line"><span class="keyword">snd_pcm_format_t</span> format = SND_PCM_FORMAT_S16_LE;</span><br><span class="line"><span class="comment">// 码率，采样率,8000Hz,44100Hz</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> rate = <span class="number">44100</span>;</span><br><span class="line"><span class="comment">// 通道数</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> channels = <span class="number">2</span>;</span><br><span class="line"><span class="comment">// 帧数，这里取32</span></span><br><span class="line"><span class="keyword">snd_pcm_uframes_t</span> frames = <span class="number">32</span>;</span><br><span class="line"><span class="comment">// 以下为可选参数</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> bytes_per_frame;</span><br><span class="line"><span class="comment">// 软件重采样</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> soft_resample;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开设备</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">snd_pcm_open(&amp;chandle, device, SND_PCM_STREAM_CAPTURE, <span class="number">0</span>);</span><br><span class="line">snd_pcm_open(&amp;phandle, device, SND_PCM_STREAM_PLAYBACK, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>增加一个错误判断<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> err;</span><br><span class="line"><span class="keyword">if</span> ((err = snd_pcm_open(&amp;chandle, device, SND_PCM_STREAM_CAPTURE, <span class="number">0</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Capture device open failed."</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ((err = snd_pcm_open(&amp;phandle, device, SND_PCM_STREAM_PLAYBACK, <span class="number">0</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Playback device open failed."</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>设置参数，这里就不增加错误判断了，不然显得有些长了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先计算每帧数据的大小</span></span><br><span class="line">bytes_per_frame = snd_pcm_format_width(format) / <span class="number">8</span> * <span class="number">2</span>;</span><br><span class="line"><span class="comment">// 计算需要分配的缓存空间的大小</span></span><br><span class="line">buffer_size = frames * bytes_per_frame;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为参数分配空间</span></span><br><span class="line">snd_pcm_hw_params_alloca(&amp;params);</span><br><span class="line"><span class="comment">// 填充参数空间</span></span><br><span class="line">snd_pcm_hw_params_any(handle, params);</span><br><span class="line"><span class="comment">// 设置数据访问方式</span></span><br><span class="line">snd_pcm_hw_params_set_access(handle, params, access_type);</span><br><span class="line"><span class="comment">// 设置格式</span></span><br><span class="line">snd_pcm_hw_params_set_format(handle, params, format);</span><br><span class="line"><span class="comment">// 设置通道</span></span><br><span class="line">snd_pcm_hw_params_set_channels(handle, params, channels);</span><br><span class="line"><span class="comment">// 设置采样率</span></span><br><span class="line">snd_pcm_hw_params_set_rate_near(handle, params, &amp;rate, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可选项，不改不影响</span></span><br><span class="line"><span class="comment">// 设置缓存大小</span></span><br><span class="line">buffer_size = period_size * <span class="number">2</span>;</span><br><span class="line">snd_pcm_hw_params_set_buffer_size_near(handle, params, &amp;buffer_size);</span><br><span class="line"><span class="comment">// 设置段大小，period与OSS中的segment类似</span></span><br><span class="line">period_size = buffer_size / <span class="number">2</span>;</span><br><span class="line">snd_pcm_hw_params_set_period_size_near(handle, params, &amp;period_size, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置参数</span></span><br><span class="line">snd_pcm_hw_params(handle, params);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读写数据</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分配缓存空间，大小上面通过buffer_size计算出了</span></span><br><span class="line"><span class="keyword">char</span> *buffer = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(buffer_size);</span><br><span class="line"><span class="comment">// 读写数据</span></span><br><span class="line">snd_pcm_readi(chandle, buffer, frames);</span><br><span class="line">snd_pcm_writei(phandle, buffer, frames);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>循环播放</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	snd_pcm_readi(chandle, buffer, frames);</span><br><span class="line">	snd_pcm_writei(phandle, buffer, frames);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>捕获一定时间的音频数据到文件流</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ofstream <span class="title">output</span><span class="params">(<span class="string">"test.pcm"</span>, ios::trunc)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> loop_sec;</span><br><span class="line"><span class="keyword">int</span> frames_readed;</span><br><span class="line">loop_sec = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> loop_limit;</span><br><span class="line"><span class="comment">// 计算循环大小</span></span><br><span class="line">loop_limit = loop_sec * rate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; loop_limit; )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 这里还需要判断一下返回值是否为负</span></span><br><span class="line">	frames_readed = snd_pcm_readi(chandle, buffer, frames);</span><br><span class="line">	output.write(buffer, buffer_size);</span><br><span class="line">	i += frames_readed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭设备、释放指针</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">snd_pcm_close(chandle);</span><br><span class="line">snd_pcm_close(phandle);</span><br><span class="line"><span class="built_in">free</span>(buffer);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="封装一下"><a href="#封装一下" class="headerlink" title="封装一下"></a>封装一下</h1><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ul>
+<li><strong>[已解决]</strong> 录放音过程中出现高音，多半是读写设备是缓存大小设置的问题。</li>
+<li><p><strong>[已解决]</strong> 放音过程中也许会出现”Broken pipe”的错误，添加如下需要重新准备设备</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">err = snd_pcm_writei(handle, input_buffer, frames);</span><br><span class="line"><span class="keyword">if</span> (err == -EPIPE)</span><br><span class="line">&#123;</span><br><span class="line">	snd_pcm_prepare(handle);</span><br><span class="line">	<span class="keyword">continue</span>;</span><br><span class="line">	<span class="comment">// 或者</span></span><br><span class="line">	<span class="comment">// return 0;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>[未解决]</strong> 如果录音之后立即放音，开始不会有延时，但是时间长了以后延时会累加。</p>
+<h1 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h1></li>
+<li><a href="https://github.com/Pokerpoke/Ras_node/blob/master/an-core/lib/voice_base.cc" target="_blank" rel="noopener">github–Ras_Node</a></li>
+<li><a href="https://www.alsa-project.org/alsa-doc/alsa-lib/examples.html" target="_blank" rel="noopener">官方例程</a></li>
+<li><a href="http://magodo.github.io/audio/2016/04/14/alsa-pcm.html" target="_blank" rel="noopener">ALSA - PCM接口</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/5.ALSA录放音/" data-id="cjejklggi000av2jxnnbxngmx" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/6.CMake FindXXXX.cmake/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/1.自然辩证法概论小论文/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

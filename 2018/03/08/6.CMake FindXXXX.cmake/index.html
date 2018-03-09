@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CMake Findxxxx.cmake背景很多情况下编译项目需要链接第三方库，此时需要知道第三方库的以下信息：  .h头文件的地址 动态库.so或者静态库.a文件的地址 链接的库的名字  常用库有些常用的库会提供一个FindXXXX.cmake文件，此时我们只需要使用以下命令(以log4cpp为例) 123# 添加REQUIRED参数来表示这是必须的依赖库find_package(LOG4CPP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/2018/03/08/6.CMake FindXXXX.cmake/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CMake Findxxxx.cmake背景很多情况下编译项目需要链接第三方库，此时需要知道第三方库的以下信息：  .h头文件的地址 动态库.so或者静态库.a文件的地址 链接的库的名字  常用库有些常用的库会提供一个FindXXXX.cmake文件，此时我们只需要使用以下命令(以log4cpp为例) 123# 添加REQUIRED参数来表示这是必须的依赖库find_package(LOG4CPP">
+<meta property="og:updated_time" content="2018-01-12T16:47:13.143Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="CMake Findxxxx.cmake背景很多情况下编译项目需要链接第三方库，此时需要知道第三方库的以下信息：  .h头文件的地址 动态库.so或者静态库.a文件的地址 链接的库的名字  常用库有些常用的库会提供一个FindXXXX.cmake文件，此时我们只需要使用以下命令(以log4cpp为例) 123# 添加REQUIRED参数来表示这是必须的依赖库find_package(LOG4CPP">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-6.CMake FindXXXX.cmake" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/6.CMake FindXXXX.cmake/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.268Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CMake-Findxxxx-cmake"><a href="#CMake-Findxxxx-cmake" class="headerlink" title="CMake Findxxxx.cmake"></a>CMake Findxxxx.cmake</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>很多情况下编译项目需要链接第三方库，此时需要知道第三方库的以下信息：</p>
+<ul>
+<li>.h头文件的地址</li>
+<li>动态库.so或者静态库.a文件的地址</li>
+<li>链接的库的名字</li>
+</ul>
+<h2 id="常用库"><a href="#常用库" class="headerlink" title="常用库"></a>常用库</h2><p>有些常用的库会提供一个<code>FindXXXX.cmake</code>文件，此时我们只需要使用以下命令(以<code>log4cpp</code>为例)</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加REQUIRED参数来表示这是必须的依赖库</span></span><br><span class="line"><span class="keyword">find_package</span>(LOG4CPP REQUIRED)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;LOG4CPP_INCLUDE_DIR&#125;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>为了能够包好多个Finder，需要组织以下目录结构以便之后添加相关module</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">├── CMakeLists.txt</span><br><span class="line">│   ├── cmake</span><br><span class="line">│   │   ├── modules                 # 用以存放FindXXXX.cmake</span><br><span class="line">│   │   │   └── FindLOG4CPP.cmake</span><br><span class="line">│   │   └── toolschain</span><br><span class="line">│   │       └── Tiny4412.cmake      # 用于存放toolschain.cmake</span><br></pre></td></tr></table></figure>
+<p>在顶层CMakeLists.txt中添加modules路径</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_MODULE_PATH </span><br><span class="line">    APPEND <span class="string">"$&#123;CMAKE_SOURCE_DIR&#125;/cmake/modules/"</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<h2 id="FindXXXX-cmake"><a href="#FindXXXX-cmake" class="headerlink" title="FindXXXX.cmake"></a>FindXXXX.cmake</h2><p>有些时候，一些库并没有提供CMake模块文件，或者使用<code>makefile</code>进行编译，就需要手写Finder了，建立<code>./cmake/modules/</code>目录，用以存放本项目使用到的Finder。(依旧以log4cpp为例)建立一个名为<code>FindLOG4CPP.cmake</code>的文件，内容如下</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># - Find Log4cpp</span></span><br><span class="line"><span class="comment"># Find the native LOG4CPP includes and library</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  LOG4CPP_INCLUDE_DIRS - where to find LOG4CPP.h, etc.</span></span><br><span class="line"><span class="comment">#  LOG4CPP_LIBRARIES   - List of libraries when using LOG4CPP.</span></span><br><span class="line"><span class="comment">#  LOG4CPP_FOUND       - True if LOG4CPP found.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断是否已经包含log4cpp</span></span><br><span class="line"><span class="keyword">if</span> (LOG4CPP_INCLUDE_DIR)</span><br><span class="line">    <span class="keyword">set</span>(LOG4CPP_FIND_QUIETLY <span class="keyword">TRUE</span>)</span><br><span class="line"><span class="keyword">endif</span> ()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找头文件位置</span></span><br><span class="line"><span class="comment"># PATH_SUFFIXES 路径后缀，正常安装的log4cpp位于系统路径/log4cpp/文件夹下</span></span><br><span class="line"><span class="keyword">find_path</span>(LOG4CPP_INCLUDE_DIR</span><br><span class="line">    NAMES Category.hh</span><br><span class="line">    <span class="comment"># 可以通过以下命令来手动制定查找路径</span></span><br><span class="line">    <span class="comment"># PATHS /usr/local/include</span></span><br><span class="line">    PATH_SUFFIXES log4cpp</span><br><span class="line">    DOC <span class="string">"Log4cpp include directories"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找库文件位置</span></span><br><span class="line"><span class="keyword">find_library</span>(LOG4CPP_LIBRARY</span><br><span class="line">    NAMES log4cpp</span><br><span class="line">    DOC <span class="string">"Log4cpp library"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时找到头文件位置和库文件位置时给相关变量赋值</span></span><br><span class="line"><span class="keyword">if</span> (LOG4CPP_INCLUDE_DIR <span class="keyword">AND</span> LOG4CPP_LIBRARY)</span><br><span class="line">    <span class="keyword">set</span>(LOG4CPP_FOUND <span class="keyword">TRUE</span>)</span><br><span class="line">    <span class="keyword">set</span>(LOG4CPP_LIBRARIES <span class="variable">$&#123;LOG4CPP_LIBRARY&#125;</span>)</span><br><span class="line">    <span class="keyword">set</span>(LOG4CPP_INCLUDE_DIRS <span class="variable">$&#123;LOG4CPP_INCLUDE_DIR&#125;</span>)</span><br><span class="line"><span class="keyword">else</span> ()</span><br><span class="line">    <span class="keyword">set</span>(LOG4CPP_FOUND <span class="keyword">FALSE</span>)</span><br><span class="line">    <span class="keyword">message</span>(WARNING <span class="string">"LOG4CPP not found"</span>)</span><br><span class="line"><span class="keyword">endif</span> ()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印一些错误信息</span></span><br><span class="line"><span class="keyword">if</span> (LOG4CPP_FOUND)</span><br><span class="line">    <span class="keyword">if</span> (NOT LOG4CPP_FIND_QUIETLY)</span><br><span class="line">        <span class="keyword">message</span>(STATUS <span class="string">"Found LOG4CPP: $&#123;LOG4CPP_LIBRARIES&#125;"</span>)</span><br><span class="line">    <span class="keyword">endif</span> ()</span><br><span class="line"><span class="keyword">else</span> ()</span><br><span class="line">    <span class="keyword">if</span> (LOG4CPP_FIND_REQUIRED)</span><br><span class="line">        <span class="keyword">message</span>(STATUS <span class="string">"Looked for LOG4CPP libraries named $&#123;LOG4CPPS_NAMES&#125;."</span>)</span><br><span class="line">        <span class="keyword">message</span>(FATAL_ERROR <span class="string">"Could NOT find LOG4CPP library"</span>)</span><br><span class="line">    <span class="keyword">endif</span> ()</span><br><span class="line"><span class="keyword">endif</span> ()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这个选项不是很懂，貌似是给cmake gui用的</span></span><br><span class="line"><span class="keyword">mark_as_advanced</span>(</span><br><span class="line">    LOG4CPP_LIBRARIES</span><br><span class="line">    LOG4CPP_INCLUDE_DIRS</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>此时只需要按照常用库的方法将相关变量写入<code>include_directories</code>即可，在生成可执行文件时链接</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(test test.cc)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(test <span class="variable">$&#123;LOG4CPP_LIBRARIES&#125;</span>)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/6.CMake FindXXXX.cmake/" data-id="cjejklggj000bv2jxlbn0vwr9" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/7.CMake交叉编译/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/5.ALSA录放音/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

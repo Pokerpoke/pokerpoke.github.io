@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Linux编译、分发工具演化1.gcc/g++GNU编译器套装（英语：GNU Compiler Collection，缩写为GCC），一套编程语言编译器，以GPL及LGPL许可证所发行的自由软件，也是GNU项目的关键部分，也是GNU工具链的主要组成部分之一。GCC（特别是其中的C语言编译器）也常被认为是跨平台编译器的事实标准。1985年由理查德·马修·斯托曼开始发展，现在由自由软件基金会负责维护工">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/2018/03/08/10.Linux编译、分发工具演化/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux编译、分发工具演化1.gcc/g++GNU编译器套装（英语：GNU Compiler Collection，缩写为GCC），一套编程语言编译器，以GPL及LGPL许可证所发行的自由软件，也是GNU项目的关键部分，也是GNU工具链的主要组成部分之一。GCC（特别是其中的C语言编译器）也常被认为是跨平台编译器的事实标准。1985年由理查德·马修·斯托曼开始发展，现在由自由软件基金会负责维护工">
+<meta property="og:updated_time" content="2017-11-29T13:42:48.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="Linux编译、分发工具演化1.gcc/g++GNU编译器套装（英语：GNU Compiler Collection，缩写为GCC），一套编程语言编译器，以GPL及LGPL许可证所发行的自由软件，也是GNU项目的关键部分，也是GNU工具链的主要组成部分之一。GCC（特别是其中的C语言编译器）也常被认为是跨平台编译器的事实标准。1985年由理查德·马修·斯托曼开始发展，现在由自由软件基金会负责维护工">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-10.Linux编译、分发工具演化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/10.Linux编译、分发工具演化/" class="article-date">
+  <time datetime="2018-03-09T06:38:50.561Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux编译、分发工具演化"><a href="#Linux编译、分发工具演化" class="headerlink" title="Linux编译、分发工具演化"></a>Linux编译、分发工具演化</h1><h2 id="1-gcc-g"><a href="#1-gcc-g" class="headerlink" title="1.gcc/g++"></a>1.gcc/g++</h2><p>GNU编译器套装（英语：GNU Compiler Collection，缩写为GCC），一套编程语言编译器，以GPL及LGPL许可证所发行的自由软件，也是GNU项目的关键部分，也是GNU工具链的主要组成部分之一。GCC（特别是其中的C语言编译器）也常被认为是跨平台编译器的事实标准。1985年由理查德·马修·斯托曼开始发展，现在由自由软件基金会负责维护工作。</p>
+<p>原名为GNU C语言编译器（GNU C Compiler），因为它原本只能处理C语言。GCC很快地扩展，变得可处理C++。之后也变得可处理Fortran、Pascal、Objective-C、Java、Ada，以及Go与其他语言。</p>
+<p>许多操作系统，包括许多类Unix系统，如Linux及BSD家族都采用GCC作为标准编译器。苹果电脑预装的Mac OS X操作系统也采用这个编译器。</p>
+<p>GCC原本用C开发，后来因为LLVM、Clang的崛起，它更快地将开发语言转换为C++。许多C的爱好者在对C++一知半解的情况下主观认定C++的性能一定会输给C，但是Taylor给出了不同的意见，并表明C++不但性能不输给C，而且能设计出更好，更容易维护的程序[（GCC’s move to C++）。<a href="https://zh.wikipedia.org/wiki/GCC" target="_blank" rel="noopener">gcc–wiki</a></p>
+<p>gcc应该是Linux系统中最基础的编译方式了，后来演化出的makefile、cmake等等最后也转化成了相应的gcc命令来执行，对于<code>test.cc</code>，gcc的一步到位的命令如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -o test</span><br></pre></td></tr></table></figure>
+<p>实际上，这个过程经过了预编译，编译，汇编，链接四个步骤，具体解释可以参见<a href="http://www.cnblogs.com/ggjucheng/archive/2011/12/14/2287738.html" target="_blank" rel="noopener">Linux GCC常用命令</a>，但是每次编译都需要输入命令行太麻烦了，于是可以使用make命令。</p>
+<h2 id="2-make"><a href="#2-make" class="headerlink" title="2.make"></a>2.make</h2><p>在软件开发中，make是一个工具程序（Utility software），经由读取叫做“makefile”的文件，自动化建构软件。它是一种转化文件形式的工具，转换的目标称为“target”；与此同时，它也检查文件的依赖关系，如果需要的话，它会调用一些外部软件来完成任务。它的依赖关系检查系统非常简单，主要根据依赖文件的修改时间进行判断。大多数情况下，它被用来编译源代码，生成结果代码，然后把结果代码连接起来生成可执行文件或者库文件。它使用叫做“makefile”的文件来确定一个target文件的依赖关系，然后把生成这个target的相关命令传给shell去执行。<a href="https://zh.wikipedia.org/zh-cn/Make" target="_blank" rel="noopener">make–wiki</a></p>
+<p>make命令的一般使用方式是先读取相关系统配置，之后使用make进行编译，等待编译完成以后将相关库文件或者可执行文件安装到系统路径。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>一个makefile的教程，<a href="http://wiki.ubuntu.org.cn/%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%86%99Makefile" target="_blank" rel="noopener">跟我一起写Makefile</a>。使用makefile也会产生一个问题，会在源代码所在目录产生许多中间文件，虽然可以使用<code>make clean</code>进行删除，但还是很麻烦，而且makefile的抽象程度并不高，所以产生了，cmake、autotools等高度抽象工具，cmake还能在不污染源代码目录的情况下进行编译，所以很多开源项目开始采用cmake的方式进行编译。</p>
+<h2 id="3-cmake-qmake"><a href="#3-cmake-qmake" class="headerlink" title="3.cmake/qmake"></a>3.cmake/qmake</h2><p>CMake前面已经介绍过了，不再赘述。</p>
+<p>qmake是编译Qt项目时用的，但是不如CMake好用。</p>
+<p>其实cmake等工具也是生成makefile的方式进行编译项目，在执行<code>cmake ..</code>命令以后可以在<code>build</code>目录下发现makefile文件。</p>
+<h2 id="4-二进制分发"><a href="#4-二进制分发" class="headerlink" title="4.二进制分发"></a>4.二进制分发</h2><p>顾名思义，就是直接将编译好的可执行程序或者动态库拷贝到生产环境中，这种情况下的部署速度应该只有网速或者U盘读取速度有关了，缺点也很明显，需要保证开发环境与生产环境的基本一致，需要保证依赖库在生产环境中存在。</p>
+<h2 id="5-git"><a href="#5-git" class="headerlink" title="5.git"></a>5.git</h2><p>git是一个分布式的版本管理工具，也是目前最流行的版本管理工具，同时<a href="https://github.com/" target="_blank" rel="noopener">github</a>也成为了目前最流行的项目托管平台，同时gitlab、gitea等开源工具也能用来搭建私人的项目托管服务器，所以git也可以算是一个很方便的分发、部署工具，对于一般项目，只需要短短几行代码就能从源码进行构建。</p>
+<p>面对一个全新的环境，我们完全可以用这种方法进行软件分发，项目部署，但是缺点也很明显，每次都需要从源码进行构建，在项目较大或者计算机性能不足够的时候费时费力。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone http://path/to/test.git</span><br><span class="line">cd test</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake .. &amp;&amp; make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="6-包管理"><a href="#6-包管理" class="headerlink" title="6.包管理"></a>6.包管理</h2><p>软件包管理系统是在电脑中自动安装、配制、卸载和升级软件包的工具组合，在各种系统软件和应用软件的安装管理中均有广泛应用。</p>
+<p>在Linux发行版中，几乎每一个发行版都有自己的软件包管理系统。常见的有：</p>
+<ul>
+<li>管理deb软件包的dpkg以及它的前端apt（使用于Debian、Ubuntu）。</li>
+<li>RPM套件管理員以及它的前端dnf（使用于Fedora）、前端yum（使用于Red Hat Enterprise Linux）、前端ZYpp（使用于openSUSE）、前端urpmi（使用于Mandriva Linux、Mageia）等。使用软件包管理系统将大大简化在Linux发行版中安装软件的过程。<a href="https://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener">软件包管理系统—wiki</a></li>
+</ul>
+<p>使用cpack进行打包，会在deb包中添加相关的依信息，参考<a href="https://nowardev.wordpress.com/2009/12/27/how-to-create-a-debian-package-for-script-and-for-project-that-use-cmake/" target="_blank" rel="noopener">这篇文章</a>。优点很明显，解决了二进制分发的依赖的问题，只要在包信息中添加相关信息，会在部署时自动安装相关依赖，也解决了源码分发的速度问题，缺点也很明显，如果目标系统中没有包管理系统，就GG了。所以产生了另一种分发机制，镜像分发，其中比较流行的是docker。</p>
+<h2 id="7-docker"><a href="#7-docker" class="headerlink" title="7.docker"></a>7.docker</h2><p>详细介绍参见<a href="https://yeasy.gitbooks.io/docker_practice/content/introduction/what.html" target="_blank" rel="noopener">docker–gitbook</a>。</p>
+<p>docker的实质是一种虚拟化技术，传统的虚拟化技术是在宿主机虚拟出一套完整的硬件后运行一个完整的操作系统，并在该虚拟系统中运行所需应用，而docker直接运行与宿主内核，相比传统虚拟机更为轻便。</p>
+<p>如果通过docker进行分发，只需要在相应的docker镜像中编译相应的程序以及依赖库，然后将镜像推送到服务器上，在开发环境中进行下载即可，这种方式对需要大规模部署的项目来说，效率很高，而且更加易于维护和扩展。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/10.Linux编译、分发工具演化/" data-id="cjejkg2480000uajxclotuuaj" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/11.Nginx搭建简单的文件共享服务/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/9.JRTPLIB使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

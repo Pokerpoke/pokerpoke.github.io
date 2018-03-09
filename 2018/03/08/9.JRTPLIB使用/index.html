@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JRTPLIB使用1.RTP简介实时传输协议（Real-time Transport Protocol或简写RTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。 国际电信联盟ITU-T也发布了自己的RTP文档，作为H.225.0，但是后来当IETF发布了关于它的稳定的标准RFC后就被取消了。它作为因特网标准在RFC 3550（该文档的旧版本是RFC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/2018/03/08/9.JRTPLIB使用/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JRTPLIB使用1.RTP简介实时传输协议（Real-time Transport Protocol或简写RTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。 国际电信联盟ITU-T也发布了自己的RTP文档，作为H.225.0，但是后来当IETF发布了关于它的稳定的标准RFC后就被取消了。它作为因特网标准在RFC 3550（该文档的旧版本是RFC">
+<meta property="og:updated_time" content="2017-11-28T15:04:46.986Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="JRTPLIB使用1.RTP简介实时传输协议（Real-time Transport Protocol或简写RTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。 国际电信联盟ITU-T也发布了自己的RTP文档，作为H.225.0，但是后来当IETF发布了关于它的稳定的标准RFC后就被取消了。它作为因特网标准在RFC 3550（该文档的旧版本是RFC">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-9.JRTPLIB使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/9.JRTPLIB使用/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.272Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JRTPLIB使用"><a href="#JRTPLIB使用" class="headerlink" title="JRTPLIB使用"></a>JRTPLIB使用</h1><h2 id="1-RTP简介"><a href="#1-RTP简介" class="headerlink" title="1.RTP简介"></a>1.RTP简介</h2><p>实时传输协议（Real-time Transport Protocol或简写RTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。</p>
+<p>国际电信联盟ITU-T也发布了自己的RTP文档，作为H.225.0，但是后来当IETF发布了关于它的稳定的标准RFC后就被取消了。它作为因特网标准在RFC 3550（该文档的旧版本是RFC 1889）有详细说明。RFC 3551（STD 65，旧版本是RFC 1890）详细描述了使用最小控制的音频和视频会议。</p>
+<p>RTP协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议，但后来被用在很多单播应用中。RTP协议常用于流媒体系统（配合RTSP协议），视频会议和一键通（Push to Talk）系统（配合H.323或SIP），使它成为IP电话产业的技术基础。RTP协议和RTP控制协议RTCP一起使用，而且它是建立在UDP协议上的。<a href="https://zh.wikipedia.org/wiki/%E5%AE%9E%E6%97%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">实时传输协议——wiki</a></p>
+<h2 id="2-JRTPLIB"><a href="#2-JRTPLIB" class="headerlink" title="2.JRTPLIB"></a>2.JRTPLIB</h2><p>RTP 是目前解决流媒体实时传输问题的最好办法，如果需要在Linux平台上进行实时流媒体编程，可以考虑使用一些开放源代码的RTP库，如LIBRTP、 JRTPLIB等。 JRTPLIB是一个面向对象的RTP库，它完全遵循RFC 1889设计，在很多场合下是一个非常不错的选择，下面就以JRTPLIB为例，讲述如何在Linux平台上运用RTP协议进行实时流媒体编程。</p>
+<p>JRTPLIB 是一个用C++语言实现的RTP库，目前已经可以运行在Windows、Linux、FreeBSD、Solaris、Unix和 VxWorks等多种操作系统上。——<a href="http://www.oschina.net/p/jrtplib" target="_blank" rel="noopener">jrtp详细介绍</a></p>
+<h2 id="3-JRTPLIB编译"><a href="#3-JRTPLIB编译" class="headerlink" title="3.JRTPLIB编译"></a>3.JRTPLIB编译</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/j0r1/JRTPLIB.git</span><br><span class="line">cd JRTPLIB</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake .. &amp;&amp; make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
+<p>如果需要启用JThread支持，需要在编译JRTPLIB之前编译JThread</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/j0r1/JThread.git</span><br><span class="line">cd JRTPLIB</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake .. &amp;&amp; make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="4-JRTPLIB例程"><a href="#4-JRTPLIB例程" class="headerlink" title="4.JRTPLIB例程"></a>4.JRTPLIB例程</h2><p>官方历程参见<a href="https://github.com/j0r1/JRTPLIB/tree/master/examples" target="_blank" rel="noopener">https://github.com/j0r1/JRTPLIB/tree/master/examples</a>，以下是<code>example1.cpp</code>，添加了一些中文注释</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"rtpsession.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"rtpudpv4transmitter.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"rtpipv4address.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"rtpsessionparams.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"rtperrors.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"rtplibraryversion.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> jrtplib;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印错误信息</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">checkerror</span><span class="params">(<span class="keyword">int</span> rtperr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (rtperr &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"ERROR: "</span> &lt;&lt; RTPGetErrorString(rtperr) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主循环</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// windows相关，不需要可以删了</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RTP_SOCKETTYPE_WINSOCK</span></span><br><span class="line">    WSADATA dat;</span><br><span class="line">    WSAStartup(MAKEWORD(<span class="number">2</span>,<span class="number">2</span>),&amp;dat);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// RTP_SOCKETTYPE_WINSOCK</span></span></span><br><span class="line"></span><br><span class="line">    RTPSession sess;</span><br><span class="line">    <span class="keyword">uint16_t</span> portbase,destport;</span><br><span class="line">    <span class="keyword">uint32_t</span> destip;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> ipstr;</span><br><span class="line">    <span class="keyword">int</span> status,i,num;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印JRTPLIB版本</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Using version "</span> &lt;&lt; RTPLibraryVersion::GetVersion().GetVersionString() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取本地端口，用以接收</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter local portbase:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; portbase;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 目标地址，本机使用127.0.0.1</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the destination IP address"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; ipstr;</span><br><span class="line">    destip = inet_addr(ipstr.c_str());</span><br><span class="line">    <span class="keyword">if</span> (destip == INADDR_NONE)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"Bad IP address specified"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// inet_addr函数返回的是网络字节序，需要将网络字节序转化为主机字节序</span></span><br><span class="line">    destip = ntohl(destip);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 目标端口，如果发送给本机，与上面的接收端口相同即可</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter the destination port"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; destport;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 发包数量</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Number of packets you wish to be sent:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; num;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建传输参数和会话参数</span></span><br><span class="line">    RTPUDPv4TransmissionParams transparams;</span><br><span class="line">    RTPSessionParams sessparams;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// IMPORTANT: The local timestamp unit MUST be set, otherwise</span></span><br><span class="line">    <span class="comment">//            RTCP Sender Report info will be calculated wrong</span></span><br><span class="line">    <span class="comment">// In this case, we'll be sending 10 samples each second, so we'll</span></span><br><span class="line">    <span class="comment">// put the timestamp unit to (1.0/10.0)</span></span><br><span class="line">    <span class="comment">// 设置时间戳</span></span><br><span class="line">    sessparams.SetOwnTimestampUnit(<span class="number">1.0</span>/<span class="number">10.0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 是否接收自己发送的包</span></span><br><span class="line">    sessparams.SetAcceptOwnPackets(<span class="literal">true</span>);</span><br><span class="line">    <span class="comment">// 设置接收端口</span></span><br><span class="line">    transparams.SetPortbase(portbase);</span><br><span class="line">    <span class="comment">// 创建端口</span></span><br><span class="line">    status = sess.Create(sessparams,&amp;transparams);</span><br><span class="line">    checkerror(status);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写入IPv4地址和端口</span></span><br><span class="line">    <span class="function">RTPIPv4Address <span class="title">addr</span><span class="params">(destip,destport)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加目标地址</span></span><br><span class="line">    status = sess.AddDestination(addr);</span><br><span class="line">    checkerror(status);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span> ; i &lt;= num ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\nSending packet %d/%d\n"</span>,i,num);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发包</span></span><br><span class="line">        status = sess.SendPacket((<span class="keyword">void</span> *)<span class="string">"1234567890"</span>,<span class="number">10</span>,<span class="number">0</span>,<span class="literal">false</span>,<span class="number">10</span>);</span><br><span class="line">        checkerror(status);</span><br><span class="line"></span><br><span class="line">        sess.BeginDataAccess();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查收包</span></span><br><span class="line">        <span class="keyword">if</span> (sess.GotoFirstSourceWithData())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">do</span></span><br><span class="line">            &#123;</span><br><span class="line">                RTPPacket *pack;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span> ((pack = sess.GetNextPacket()) != <span class="literal">NULL</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// 在这里进行数据处理</span></span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">"Got packet !\n"</span>);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 不再需要这个包了，删除之</span></span><br><span class="line">                    sess.DeletePacket(pack);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">while</span> (sess.GotoNextSourceWithData());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sess.EndDataAccess();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这部分与JThread库相关</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> RTP_SUPPORT_THREAD</span></span><br><span class="line">        status = sess.Poll();</span><br><span class="line">        checkerror(status);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// RTP_SUPPORT_THREAD</span></span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 等待一秒，发包间隔</span></span><br><span class="line">        RTPTime::Wait(RTPTime(<span class="number">1</span>,<span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 销毁对话</span></span><br><span class="line">    sess.BYEDestroy(RTPTime(<span class="number">10</span>,<span class="number">0</span>),<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Windows相关</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RTP_SOCKETTYPE_WINSOCK</span></span><br><span class="line">    WSACleanup();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// RTP_SOCKETTYPE_WINSOCK</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里会有问题，怎么读取收到的packet中的data，需要先包含头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"rtppacket.h"</span></span></span><br></pre></td></tr></table></figure>
+<p>在进行数据处理的地方使用以下函数获取负载数据，和负载长度</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pack-&gt;GetPayloadData();</span><br><span class="line">pack-&gt;GetPayloadLength();</span><br></pre></td></tr></table></figure>
+<h2 id="5-CMake配置"><a href="#5-CMake配置" class="headerlink" title="5.CMake配置"></a>5.CMake配置</h2><p>在使用CMake进行编译的时候可能会出现找不到库的情况，需要手写<code>FindJRTPLIB.cmake</code></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># - Find JRTPLIB library</span></span><br><span class="line"><span class="comment"># Once done this will define</span></span><br><span class="line"><span class="comment"># JRTPLIB_FOUND - system has JRTPLIB</span></span><br><span class="line"><span class="comment"># JRTPLIB_INCLUDE_DIR - JRTPLIB include directories</span></span><br><span class="line"><span class="comment"># JRTPLIB_LIBRARY - where to find the JRTPLIB library</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(JRTPLIB_INCLUDE_DIR)</span><br><span class="line">    <span class="comment"># Already in cache, be silent</span></span><br><span class="line">    <span class="keyword">set</span>(JRTPLIB_FIND_QUIETLY <span class="keyword">TRUE</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_path</span>(JRTPLIB_INCLUDE_DIR</span><br><span class="line">    NAMES rtpsession.h</span><br><span class="line">    PATH_SUFFIXES jrtplib jrtplib3</span><br><span class="line">    DOC <span class="string">"JRTPLIB include directories"</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_library</span>(JRTPLIB_LIBRARY</span><br><span class="line">    NAMES jrtp</span><br><span class="line">    DOC <span class="string">"JRTPLIB library"</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="comment"># handle the QUIETLY and REQUIRED arguments and set JRTPLIB_FOUND to TRUE if all listed variables are TRUE</span></span><br><span class="line"><span class="keyword">include</span>(FindPackageHandleStandardArgs)</span><br><span class="line">find_package_handle_standard_args(JRTPLIB</span><br><span class="line">                                  REQUIRED_VARS JRTPLIB_LIBRARY JRTPLIB_INCLUDE_DIR</span><br><span class="line">                                  VERSION_VAR JRTPLIB_VERSION_STRING)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(JRTPLIB_INCLUDE_DIR <span class="keyword">AND</span> JRTPLIB_LIBRARY)</span><br><span class="line">    <span class="keyword">set</span>(JRTPLIB_FOUND <span class="keyword">TRUE</span>)</span><br><span class="line">    <span class="keyword">set</span>(JRTPLIB_LIBRARIES <span class="variable">$&#123;JRTPLIB_LIBRARY&#125;</span>)</span><br><span class="line">    <span class="keyword">set</span>(JRTPLIB_INCLUDE_DIRS <span class="variable">$&#123;JRTPLIB_INCLUDE_DIR&#125;</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">    <span class="keyword">set</span> (JRTPLIB_FOUND <span class="keyword">FALSE</span>)</span><br><span class="line">    <span class="keyword">message</span>(FATAL_ERROR <span class="string">"JRTPLIB not found"</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">mark_as_advanced</span>(</span><br><span class="line">    JRTPLIB_INCLUDE_DIR</span><br><span class="line">    JRTPLIB_LIBRARY)</span><br></pre></td></tr></table></figure>
+<p>如果前面编译了JThread库，或者在编译的时候提示</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This function is not available when using the RTP Poll thread feature.</span><br></pre></td></tr></table></figure>
+<p>则还需要将JThread库进行链接，<code>FindJTHREAD.cmake</code>如下</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># - Find JTHREAD library</span></span><br><span class="line"><span class="comment"># Once done this will define</span></span><br><span class="line"><span class="comment"># JTHREAD_FOUND - system has JTHREAD</span></span><br><span class="line"><span class="comment"># JTHREAD_INCLUDE_DIR - JTHREAD include directories</span></span><br><span class="line"><span class="comment"># JTHREAD_LIBRARY - where to find the JTHREAD library</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(JTHREAD_INCLUDE_DIR)</span><br><span class="line">    <span class="comment"># Already in cache, be silent</span></span><br><span class="line">    <span class="keyword">set</span>(JTHREAD_FIND_QUIETLY <span class="keyword">TRUE</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_path</span>(JTHREAD_INCLUDE_DIR</span><br><span class="line">    NAMES jthread.h</span><br><span class="line">    PATH_SUFFIXES jthread jthread3</span><br><span class="line">    DOC <span class="string">"JTHREAD include directories"</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_library</span>(JTHREAD_LIBRARY</span><br><span class="line">    NAMES jthread</span><br><span class="line">    DOC <span class="string">"JTHREAD library"</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="comment"># handle the QUIETLY and REQUIRED arguments and set JTHREAD_FOUND to TRUE if all listed variables are TRUE</span></span><br><span class="line"><span class="keyword">include</span>(FindPackageHandleStandardArgs)</span><br><span class="line">find_package_handle_standard_args(JTHREAD</span><br><span class="line">                                  REQUIRED_VARS JTHREAD_LIBRARY JTHREAD_INCLUDE_DIR</span><br><span class="line">                                  VERSION_VAR JTHREAD_VERSION_STRING)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(JTHREAD_INCLUDE_DIR <span class="keyword">AND</span> JTHREAD_LIBRARY)</span><br><span class="line">    <span class="keyword">set</span>(JTHREAD_FOUND <span class="keyword">TRUE</span>)</span><br><span class="line">    <span class="keyword">set</span>(JTHREAD_LIBRARIES <span class="variable">$&#123;JTHREAD_LIBRARY&#125;</span>)</span><br><span class="line">    <span class="keyword">set</span>(JTHREAD_INCLUDE_DIRS <span class="variable">$&#123;JTHREAD_INCLUDE_DIR&#125;</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">    <span class="keyword">set</span> (JTHREAD_FOUND <span class="keyword">FALSE</span>)</span><br><span class="line">    <span class="keyword">message</span>(FATAL_ERROR <span class="string">"JTHREAD not found"</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">mark_as_advanced</span>(</span><br><span class="line">    JTHREAD_INCLUDE_DIR</span><br><span class="line">    JTHREAD_LIBRARY)</span><br></pre></td></tr></table></figure>
+<p>之后在顶层的<code>CMakeLists.txt</code>中使用<code>find_package(JRTPLIB)</code>进行链接，不再赘述。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/9.JRTPLIB使用/" data-id="cjejklggl000ev2jxyn7o0l0l" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/10.Linux编译、分发工具演化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/8.CMake编译Qt项目/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

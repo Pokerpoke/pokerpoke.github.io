@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Vim Vundle 配置Set up Vim Vundle. 1.关于VundleAbout Vundle. Vundle 是一个Vim的包管理工具，类似于sublime text,atom,oh-my-zsh的插件管理工具。 Vundle is a package manager of Vim. Just like packages manager of sublime text, atom,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://pokerpoke.github.io/2018/03/08/1.vim vundle 配置/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Vim Vundle 配置Set up Vim Vundle. 1.关于VundleAbout Vundle. Vundle 是一个Vim的包管理工具，类似于sublime text,atom,oh-my-zsh的插件管理工具。 Vundle is a package manager of Vim. Just like packages manager of sublime text, atom,">
+<meta property="og:updated_time" content="2018-03-08T02:56:59.635Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="Vim Vundle 配置Set up Vim Vundle. 1.关于VundleAbout Vundle. Vundle 是一个Vim的包管理工具，类似于sublime text,atom,oh-my-zsh的插件管理工具。 Vundle is a package manager of Vim. Just like packages manager of sublime text, atom,">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pokerpoke.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-1.vim vundle 配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/08/1.vim vundle 配置/" class="article-date">
+  <time datetime="2018-03-09T06:38:41.244Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Vim-Vundle-配置"><a href="#Vim-Vundle-配置" class="headerlink" title="Vim Vundle 配置"></a>Vim Vundle 配置</h1><p>Set up Vim Vundle.</p>
+<h2 id="1-关于Vundle"><a href="#1-关于Vundle" class="headerlink" title="1.关于Vundle"></a>1.关于Vundle</h2><p>About Vundle.</p>
+<p>Vundle 是一个Vim的包管理工具，类似于sublime text,atom,oh-my-zsh的插件管理工具。</p>
+<p>Vundle is a package manager of Vim. Just like packages manager of sublime text, atom, oh-my-zsh, etc.</p>
+<p>Vundle的Github主页是<a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="noopener">Vundle.vim</a></p>
+<p>The index of Vundle is <a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="noopener">Vundle.vim</a></p>
+<h2 id="2-配置Vundle"><a href="#2-配置Vundle" class="headerlink" title="2.配置Vundle"></a>2.配置Vundle</h2><p>Set up Vundle.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</span><br></pre></td></tr></table></figure>
+<p>将这些代码放到<code>~/.vimrc</code>文件中，如果没有这个文件需要自己创建。</p>
+<p>Put the below codes into <code>~/.vimrc</code>. If the docments is not exists, just creat one.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">set nocompatible              " be iMproved, required</span><br><span class="line">filetype off                  " required</span><br><span class="line"></span><br><span class="line">" set the runtime path to include Vundle and initialize</span><br><span class="line">set rtp+=~/.vim/bundle/Vundle.vim</span><br><span class="line">call vundle#begin()</span><br><span class="line">" alternatively, pass a path where Vundle should install plugins</span><br><span class="line">"call vundle#begin('~/some/path/here')</span><br><span class="line"></span><br><span class="line">" let Vundle manage Vundle, required</span><br><span class="line">Plugin 'VundleVim/Vundle.vim'</span><br><span class="line"></span><br><span class="line">" The following are examples of different formats supported.</span><br><span class="line">" Keep Plugin commands between vundle#begin/end.</span><br><span class="line">" plugin on GitHub repo</span><br><span class="line">Plugin 'tpope/vim-fugitive'</span><br><span class="line">" plugin from http://vim-scripts.org/vim/scripts.html</span><br><span class="line">Plugin 'L9'</span><br><span class="line">" Git plugin not hosted on GitHub</span><br><span class="line">Plugin 'git://git.wincent.com/command-t.git'</span><br><span class="line">" git repos on your local machine (i.e. when working on your own plugin)</span><br><span class="line">Plugin 'file:///home/gmarik/path/to/plugin'</span><br><span class="line">" The sparkup vim script is in a subdirectory of this repo called vim.</span><br><span class="line">" Pass the path to set the runtimepath properly.</span><br><span class="line">Plugin 'rstacruz/sparkup', &#123;'rtp': 'vim/'&#125;</span><br><span class="line">" Install L9 and avoid a Naming conflict if you've already installed a</span><br><span class="line">" different version somewhere else.</span><br><span class="line">Plugin 'ascenator/L9', &#123;'name': 'newL9'&#125;</span><br><span class="line"></span><br><span class="line">" All of your Plugins must be added before the following line</span><br><span class="line">call vundle#end()            " required</span><br><span class="line">filetype plugin indent on    " required</span><br><span class="line">" To ignore plugin indent changes, instead use:</span><br><span class="line">"filetype plugin on</span><br><span class="line">"</span><br><span class="line">" Brief help</span><br><span class="line">" :PluginList       - lists configured plugins</span><br><span class="line">" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate</span><br><span class="line">" :PluginSearch foo - searches for foo; append `!` to refresh local cache</span><br><span class="line">" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal</span><br><span class="line">"</span><br><span class="line">" see :h vundle for more details or wiki for FAQ</span><br><span class="line">" Put your non-Plugin stuff after this line</span><br></pre></td></tr></table></figure>
+<p>运行vim，在vim中使用以下命令<code>:PluginInstall</code>来安装插件，如果出现错误，将出错的那个插件注释掉或者删除即可。</p>
+<p>Run vim and use <code>:PluginInstall</code> to install the plugins. Maybe it will come with some questions, just mark or remove the line of that plugin.</p>
+<h2 id="3-插件推荐"><a href="#3-插件推荐" class="headerlink" title="3.插件推荐"></a>3.插件推荐</h2><p>Plugin recommended.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Plugin 'altercation/vim-colors-solarized'</span><br><span class="line">Plugin 'scrooloose/syntastic'</span><br><span class="line">Plugin 'scrooloose/nerdtree'</span><br><span class="line">Plugin 'nvie/vim-flake8'</span><br><span class="line">Plugin 'pangloss/vim-javascript'</span><br><span class="line">Plugin 'Raimondi/delimitMate'</span><br></pre></td></tr></table></figure>
+<p>在安装一些插件的时候也许会提示什么vim不是支持python什么的，是由于该插件由python编写，需要将Vim重新编译。(树莓派上直接apt install的vim就没有python支持，需要重新编译)</p>
+<p>Maybe it will warn you that some plugin won’t work due to no supported by python.You need to recompile the Vim(especially on raspberry pi).</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pokerpoke.github.io/2018/03/08/1.vim vundle 配置/" data-id="cjejklgft0001v2jx48nufm2r" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/1.VS code 与 Latex 真乃天作之和/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/1.ssh免密码登陆/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/08/1.nginx将.js .css处理为text plain/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/15.samba配置文件共享服务/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/16.deluge+ss实现服务器ipv6环境下bt下载/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/14.树莓派连接无线网络/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/08/13.树莓派烧录系统镜像/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Jiang Yang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
